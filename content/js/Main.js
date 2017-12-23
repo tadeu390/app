@@ -1,5 +1,5 @@
 var Main = {
-	base_url : "http://"+window.location.host+"/git/boletimCep/index.php/",
+	base_url : "http://"+window.location.host+"/git/app/index.php/",
 	load_mask : function(){
 		$(document).ready(function(){
 			$('[data-toggle="popover"]').popover(),
@@ -120,28 +120,8 @@ var Main = {
 			}
 		});
 	},
-	disciplina_validar : function (){
-		
-		if($("#Nome").val() == "")
-			Main.show_error("Nome","error-nome","Informe o nome da disciplina","form-control is-invalid");
-		else if($("#CategoriaId").val() == "0")
-			Main.show_error("CategoriaId","error-CategoriaId","Selecione uma categoria","form-control is-invalid");
-		else
-			Main.create_edit();
-	},
-	aluno_validar : function(){
+	usuario_validar : function(){
 		Main.create_edit();
-		//if($("#Nome").val() == "")
-		//	Main.show_error("Nome","error-nome","Informe o nome do curso","form-control is-invalid");
-		
-		
-	},
-	curso_validar : function(){
-		Main.create_edit();
-		//if($("#Nome").val() == "")
-		//	Main.show_error("Nome","error-nome","Informe o nome do curso","form-control is-invalid");
-		
-		
 	},
 	id_registro : "",
 	confirm_delete : function(id){

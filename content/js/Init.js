@@ -20,29 +20,10 @@ $(document).ready(
 			if ((window.event ? event.keyCode : event.which) == 13){Main.login();}; 
 		});
 		//BTN CADASTROS
-		$( "#form_cadastro_disciplina" ).submit(function( event ) {
-			event.preventDefault();
-			Main.disciplina_validar();
-		});
 		
-		$( "#form_cadastro_curso" ).submit(function( event ) {
+		$( "#form_cadastro_usuario").submit(function( event ) {
 			event.preventDefault();
-			Main.curso_validar();
-			
-		});
-		
-		$( "#form_cadastro_aluno" ).submit(function( event ) {
-			event.preventDefault();
-			Main.aluno_validar();
-		});
-		
-		$( "#form_cadastro_turma" ).submit(function( event ) {
-			event.preventDefault();
-			Main.turma_validar();
-		});
-		$( "#form_cadastro_troca_aluno" ).submit(function( event ) {
-			event.preventDefault();
-			Main.troca_aluno_validar();
+			Main.usuario_validar();
 		});
 		
 		//FIM BTN CADASTROS

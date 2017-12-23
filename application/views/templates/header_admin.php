@@ -1,20 +1,21 @@
-<html>
+<html lang="pt-br">
 	<head> 
 		
 		<title><?php echo $title;?></title>
-		<?= link_tag('css/bootstrap.min.css') ?>
-		<?= link_tag('css/normalize.css') ?>
-		<?= link_tag('css/font-awesome.css') ?>
-		<?= link_tag('css/glyphicons.css') ?>
-		<?= link_tag('css/site.css') ?>
-		<?= link_tag('css/default.css') ?>
+		<meta charset="utf-8">
+		<?= link_tag('content/css/bootstrap.min.css') ?>
+		<?= link_tag('content/css/normalize.css') ?>
+		<?= link_tag('content/css/font-awesome.css') ?>
+		<?= link_tag('content/css/glyphicons.css') ?>
+		<?= link_tag('content/css/site.css') ?>
+		<?= link_tag('content/css/default.css') ?>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	</head >
 	<body id='c'>
 		<div class='container-fluid'>
 			<nav class="side-navbar">
 				<div class="sidenav-header d-flex align-items-center justify-content-center">
-					<div class="sidenav-header-inner  text-center"><img src="<?php echo $url;?>imagens/logo.png" alt="CEP" class="img-fluid rounded-circle">
+					<div class="sidenav-header-inner  text-center"><img src="<?php echo $url;?>content/imagens/logo.png" alt="CEP" class="img-fluid rounded-circle">
 						<h2>CEP - Admin</h2>
 					</div>
 					<div style="margin-top: 15px;" class="sidenav-header-logo"><a href="#" class="brand-small text-center">
@@ -22,22 +23,29 @@
 					</div>
 				</div>
 				<div class="main-menu">
-					<ul id="side-main-menu" class="side-menu list-unstyled">                  
-						<li id='menu_disciplina'>
-							<a href="<?php echo $url; ?>index.php/disciplina/index" > <i class="icon-home glyphicon glyphicon-paperclip" style="margin-bottom: 10px;"></i><span>Disciplina</span></a>
-						</li>
-						<li id='menu_curso'>
-							<a href="<?php echo $url; ?>index.php/curso/index" > <i class="icon-home glyphicon glyphicon-folder-open" style="margin-bottom: 10px;"></i><span>Curso</span></a>
-						</li>
-						<li id='menu_turma'>
-							<a href="<?php echo $url; ?>index.php/turma/index" ><i class="icon-form glyphicon glyphicon-book" style="margin-bottom: 10px;"></i><span>Turma</span></a>
-						</li>
-						<li id='menu_aluno'>
-							<a href="<?php echo $url; ?>index.php/aluno/index" ><i class="icon-form glyphicon glyphicon-user" style="margin-bottom: 10px;"></i><span>Aluno</span></a>
-						</li>
-						<li id='menu_boletim'>
-							<a href="<?php echo $url; ?>index.php/boletim/index" ><i class="icon-form glyphicon glyphicon-file" style="margin-bottom: 10px;"></i><span>Boletim</span></a>
-						</li>
+					<ul id="side-main-menu" class="side-menu list-unstyled">
+					<?php 
+						for($i = 0; $i < count($grupo); $i++)
+						{
+							echo"<li>"; 
+								echo"<a href='#pages-nav-list".$i."' data-toggle='collapse' aria-expanded='false'>";
+									echo"<i class='icon-interface-windows'></i>";
+									echo"<span>".$grupo[$i]['nome']."</span>";
+									echo"<div class='arrow pull-right'>";
+										echo"<i class='fa fa-angle-down'></i>";
+									echo"</div>";
+								echo"</a>";
+								echo"<ul id='pages-nav-list".$i."' class='collapse list-unstyled'>";
+									for($j = 0; $j < count($menu); $j++)
+										if($grupo[$i]['id'] == $menu[$j]['id_menu'])
+											echo"<li><a href='".$url."index.php/".$menu[$j]['url_modulo']."'><i class='".$menu[$j]['icone']."' style='margin-bottom: 10px;'></i>".$menu[$j]['nome_modulo']."</a></li>";
+								echo"</ul>";
+							echo"</li>";
+						}
+						for($i = 0; $i < count($menu); $i++)
+							if(empty($menu[$i]['id_menu']))
+								echo "<li><a href='".$menu[$i]['url_modulo']."'><i class='".$menu[$i]['icone']."' style='margin-bottom: 10px;'></i><span>".$menu[$i]['nome_modulo']."</span></a></li>";
+					?>
 					</ul>
 				</div>
 			</nav>
@@ -81,21 +89,21 @@
 						<div class="container-fluid">
 							<div class="navbar-holder d-flex align-items-center justify-content-between">
 								<div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn">
-								<span class="glyphicon glyphicon-align-justify" style='line-height: 40px; transform: scale(2.5);'> </span></a>
-								
+									<span class="glyphicon glyphicon-align-justify" style='line-height: 40px; transform: scale(2.5);'> </span></a>
 								</div>
 								<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-						<li class="nav-item">
-							<?php
-								echo"<div data-toggle='popover' data-html='true' data-placement='left' title='<div class=\"text-center\">Opções da conta</div>' 
-									data-content='
-										<button class=\"btn btn-outline-info btn-block glyphicon glyphicon-cog\" onclick=\"Main.logout()\">&nbsp;Configurações</button><button class=\"btn btn-outline-danger btn-block glyphicon glyphicon-log-out\" onclick=\"Main.logout()\">&nbsp;Sair</button>
-									
-									'  style='font-size: 40px; color: #f5f5f5; cursor: pointer; padding: 10px; border: 1px solid #e9ecef; border-radius: 35px;'>
-										 <span class='glyphicon glyphicon-user'></span></div>";
-							  ?>
-						</li>
-					</ul>
+									<li class="nav-item">
+										<?php
+											echo"<div data-toggle='popover' data-html='true' data-placement='left' title='<div class=\"text-center\">Opções da conta</div>' 
+												data-content='
+													<button class=\"btn btn-outline-info btn-block glyphicon glyphicon-cog\" onclick=\"Main.logout()\">&nbsp;Configurações</button><button class=\"btn btn-outline-danger btn-block glyphicon glyphicon-log-out\" onclick=\"Main.logout()\">&nbsp;Sair</button>
+												
+												'  style='font-size: 40px; color: #f5f5f5; cursor: pointer; padding: 10px; border: 1px solid #e9ecef; border-radius: 35px;'>
+													 <span class='glyphicon glyphicon-user'></span>
+												</div>";
+										  ?>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</nav>
