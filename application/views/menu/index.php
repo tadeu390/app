@@ -22,6 +22,7 @@
 							echo "<td>Nome</td>";
 							echo "<td>Ordem</td>";
 							echo "<td>Ativo</td>";
+							echo "<td class='text-right'></td>";
 						echo "<tr>";
 					echo "</thead>";
 					echo "<tbody>";
@@ -31,7 +32,7 @@
 								echo "<td>".$lista_menus[$i]['nome']."</td>";
 								echo "<td>".$lista_menus[$i]['ordem']."</td>";
 								echo "<td>".(($lista_menus[$i]['ativo'] == 1) ? 'Sim' : 'Não')."</td>";
-								echo "<td>";
+								echo "<td class='text-right'>";
 									echo "<a href='".$url."index.php/$controller/create_edit/".$lista_menus[$i]['id']."' title='Editar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-edit'></a> | ";
 									echo "<span onclick='Main.confirm_delete(". $lista_menus[$i]['id'] .");' id='sp_lead_trash' name='sp_lead_trash' title='Apagar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-trash'></span>";
 								echo "</td>";

@@ -7,6 +7,8 @@
 			parent::__construct();
 			if(empty($this->login_model->session_is_valid($this->session->id)['id']))
 				redirect('login/login');
+			$this->set_menu();
+			$this->data['controller'] = get_class($this);
 		}
 		
 		/*
@@ -14,13 +16,10 @@
 		*/
 		public function dashboard()
 		{
-			$data['url'] = base_url();
-			$data['title'] = 'Administração - dashboard';
-			$data['grupo'] = $this->Menu_model->get_grupo_menu();
-			$data['menu'] = $this->Menu_model->get_menu();
-			$this->load->view('templates/header_admin',$data);
-			$this->load->view('admin/dashboard',$data);
-			$this->load->view('templates/footer',$data);
+			$this->data['title'] = 'Administração - dashboard';
+			$this->load->view('templates/header_admin',$this->data);
+			$this->load->view('admin/dashboard',$this->data);
+			$this->load->view('templates/footer',$this->data);
 		}
 	}
 ?>

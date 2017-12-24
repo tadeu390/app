@@ -59,11 +59,12 @@ CREATE TABLE acesso(
 	data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	ativo BOOLEAN,
 	modulo_id INT,
+	criar BOOLEAN,
+	visualizar BOOLEAN,
+	atualizar BOOLEAN,
+	apagar BOOLEAN,
 	CONSTRAINT fk_modulo_acesso 
 		FOREIGN KEY(modulo_id) REFERENCES modulo(id),
-	permissao_id INT,
-	CONSTRAINT fk_permissao_acesso 
-		FOREIGN KEY(permissao_id) REFERENCES permissao(id),
 	grupo_id INT,
 	CONSTRAINT fk_grupo_acesso 
 		FOREIGN KEY(grupo_id) REFERENCES grupo(id)

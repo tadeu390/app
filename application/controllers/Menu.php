@@ -8,7 +8,7 @@
 			if(empty($this->login_model->session_is_valid($this->session->id)['id']))
 				redirect('login/login');
 			$this->set_menu();
-			$this->data['controller'] = 'Menu';
+			$this->data['controller'] = get_class($this);
 		}
 		
 		/*

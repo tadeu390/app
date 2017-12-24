@@ -12,7 +12,7 @@
 			$this->load->model('Usuario_model');
 			$this->load->model('Grupo_model');
 			$this->set_menu();
-			$this->data['controller'] = 'Usuario';
+			$this->data['controller'] = get_class($this);
 		}
 		
 		/*

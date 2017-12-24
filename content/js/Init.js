@@ -87,6 +87,11 @@ $(document).ready(
 			Main.modulo_validar();
 		});
 		
+		$( "#form_cadastro_grupo").submit(function( event ) {
+			event.preventDefault();
+			Main.grupo_validar();
+		});
+		
 		//FIM BTN CADASTROS
 
 		//event for form register

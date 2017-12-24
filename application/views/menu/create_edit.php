@@ -9,7 +9,7 @@
 		<p><?php if(isset($obj['id'])) echo"Editar menu"; else echo"Novo menu";  ?></p><br />
 		<?php
 			$atr = array('id' => 'form_cadastro_menu','name' => 'form_cadastro');
-			echo form_open('Menu/store',$atr);
+			echo form_open("$controller/store",$atr);
 		?>
 			<br />
 				<input type='hidden' id='id' name='id' value='<?php if(!empty($obj['id'])) echo $obj['id']; ?>'/>

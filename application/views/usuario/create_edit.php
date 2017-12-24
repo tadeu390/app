@@ -9,7 +9,7 @@
 		<p><?php if(isset($obj['id'])) echo"Editar usuário"; else echo"Novo usuário";  ?></p><br />
 		<?php
 			$atr = array('id' => 'form_cadastro_usuario','name' => 'form_cadastro');
-			echo form_open('Usuario/store',$atr);
+			echo form_open("$controller/store",$atr);
 		?>
 			<br />
 				<input type='hidden' id='id' name='id' value='<?php if(!empty($obj['id'])) echo $obj['id']; ?>'/>

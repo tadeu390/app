@@ -8,7 +8,7 @@
 			if(empty($this->login_model->session_is_valid($this->session->id)['id']))
 				redirect('login/login');
 			$this->set_menu();
-			$this->data['controller'] = 'Modulo';
+			$this->data['controller'] = get_class($this);
 		}
 		
 		/*
@@ -53,6 +53,7 @@
 				'menu_id' => $this->input->post('menu_id'),
 				'ativo' => $this->input->post('modulo_ativo')
 			);
+			
 			//bloquear acesso direto ao metodo store
 			 if(!empty($dataToSave['nome']))
 					$this->Modulo_model->set_modulo($dataToSave);

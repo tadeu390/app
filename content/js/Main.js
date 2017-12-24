@@ -192,6 +192,13 @@ var Main = {
 		else
 			Main.create_edit();
 	},
+	grupo_validar : function()
+	{
+		if($("#nome").val() == "")
+			Main.show_error("nome", 'Informe o nome de grupo', 'is-invalid');
+		else
+			Main.create_edit();
+	},
 	id_registro : "",
 	confirm_delete : function(id){
 		Main.id_registro = id;
