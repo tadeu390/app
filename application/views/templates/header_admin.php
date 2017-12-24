@@ -25,26 +25,26 @@
 				<div class="main-menu">
 					<ul id="side-main-menu" class="side-menu list-unstyled">
 					<?php 
-						for($i = 0; $i < count($grupo); $i++)
+						for($i = 0; $i < count($menu); $i++)
 						{
 							echo"<li>"; 
 								echo"<a href='#pages-nav-list".$i."' data-toggle='collapse' aria-expanded='false'>";
 									echo"<i class='icon-interface-windows'></i>";
-									echo"<span>".$grupo[$i]['nome']."</span>";
+									echo"<span>".$menu[$i]['nome']."</span>";
 									echo"<div class='arrow pull-right'>";
 										echo"<i class='fa fa-angle-down'></i>";
 									echo"</div>";
 								echo"</a>";
 								echo"<ul id='pages-nav-list".$i."' class='collapse list-unstyled'>";
-									for($j = 0; $j < count($menu); $j++)
-										if($grupo[$i]['id'] == $menu[$j]['id_menu'])
-											echo"<li><a href='".$url."index.php/".$menu[$j]['url_modulo']."'><i class='".$menu[$j]['icone']."' style='margin-bottom: 10px;'></i>".$menu[$j]['nome_modulo']."</a></li>";
+									for($j = 0; $j < count($modulo); $j++)
+										if($menu[$i]['id'] == $modulo[$j]['menu_id'])
+											echo"<li><a href='".$url."index.php/".$modulo[$j]['url_modulo']."'><i class='".$modulo[$j]['icone']."' style='margin-bottom: 10px;'></i>".$modulo[$j]['nome_modulo']."</a></li>";
 								echo"</ul>";
 							echo"</li>";
 						}
-						for($i = 0; $i < count($menu); $i++)
-							if(empty($menu[$i]['id_menu']))
-								echo "<li><a href='".$menu[$i]['url_modulo']."'><i class='".$menu[$i]['icone']."' style='margin-bottom: 10px;'></i><span>".$menu[$i]['nome_modulo']."</span></a></li>";
+						for($i = 0; $i < count($modulo); $i++)
+							if(empty($modulo[$i]['menu_id']))
+								echo "<li><a href='".$modulo[$i]['url_modulo']."'><i class='".$modulo[$i]['icone']."' style='margin-bottom: 10px;'></i><span>".$modulo[$i]['nome_modulo']."</span></a></li>";
 					?>
 					</ul>
 				</div>
@@ -79,6 +79,24 @@
 				  <div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="bt_delete">Sim</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div id="admin_warning_modal" class="modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header text-center">
+					<h5 class="modal-title">Atenção</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div id="mensagem_warning" class="modal-body text-center">
+					
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
 				  </div>
 				</div>
 			  </div>

@@ -71,31 +71,23 @@ var Main = {
 		var nome = email.substring(0, email.indexOf("@"));
 		var dominio = email.substring(email.indexOf("@")+ 1, email.length);
 
-		if ((nome.length >= 1) &&
+		if ((nome.length >= 1) && 
 			(dominio.length >= 3) && 
 			(nome.search("@")  == -1) && 
-			(dominio.search("@") == -1) &&
+			(dominio.search("@") == -1) && 
 			(nome.search(" ") == -1) && 
-			(dominio.search(" ") == -1) &&
-			(dominio.search(".") != -1) &&      
+			(dominio.search(" ") == -1) && 
+			(dominio.search(".") != -1) && 
 			(dominio.indexOf(".") >= 1)&& 
-			(dominio.lastIndexOf(".") < dominio.length - 1)) 
-		{
-			document.getElementById('email').className = "form-control is-valid";
-			document.getElementById('error-email').innerHTML = "";
+			(dominio.lastIndexOf(".") < dominio.length - 1))
 			return true;
-		}
 		else
-		{
-			document.getElementById('email').className = "form-control is-invalid";
-			document.getElementById('error-email').innerHTML = "Formato de e-mail inválido.";
 			return false;
-		}
 	},
-	show_error : function(form, id_div_error, error, class_error)
+	show_error : function(form, error, class_error)
 	{
-		document.getElementById(form).className = class_error;
-		document.getElementById(id_div_error).innerHTML = error;
+		document.getElementById(form).className = "form-control "+class_error;
+		document.getElementById("error-"+form).innerHTML = error;
 	},
 	limpa_login : function ()
 	{
@@ -115,13 +107,90 @@ var Main = {
 			cache: false,
 			type: 'POST',
 			success: function (msg) {
-				$("#mensagem").html("Dados salvos com sucesso");
-				window.location.assign(Main.base_url+$("#controller").val()+"/index");
+				if(msg.response == "sucesso")
+				{
+					$("#mensagem").html("Dados salvos com sucesso");
+					window.location.assign(Main.base_url+$("#controller").val()+"/index");
+				}
+				else
+				{
+					setTimeout(function(){
+						$("#admin_modal").modal('hide');
+						
+						$("#mensagem_warning").html(msg.response);
+						$('#admin_warning_modal').modal({
+							keyboard: false,
+							backdrop : 'static'
+						})	
+					},500);
+				}
 			}
 		});
 	},
 	usuario_validar : function(){
-		Main.create_edit();
+		if($("#nome").val() == "")
+			Main.show_error("nome", 'Informe o nome de usuário', 'is-invalid');
+		else if($("#email").val() == "")
+			Main.show_error("email", 'Informe o e-mail de usuário', 'is-invalid');
+		else if(Main.valida_email($("#email").val()) == false)
+			Main.show_error("email", 'Formato de e-mail inválido', 'is-invalid');
+		else if($("#senha").val() == "")
+			Main.show_error("senha", 'Informe a senha de usuário', 'is-invalid');
+		else
+		{
+			var trava = 0;
+			if($("#id").val() == "")//se estiver criando um usuário
+			{
+				if($("#confirmar_senha").val() == "")
+				{
+					trava = 1;
+					Main.show_error("confirmar_senha", 'Repita a senha de usuário', 'is-invalid');
+				}
+				else if($("#senha").val() != $("#confirmar_senha").val())
+				{
+					trava = 1;
+					Main.show_error("confirmar_senha", 'Senha especificada é diferente da anterior', 'is-invalid');
+				}
+			}
+			if(trava == 0)
+			{
+				if($("#grupo_id").val() == "0")
+					Main.show_error("grupo_id", 'Selecione um tipo de usuário', 'is-invalid');
+				else if($("#nova_senha").val() != "")
+				{
+					if($("#confirmar_nova_senha").val() == "")
+						Main.show_error("confirmar_nova_senha", 'Repita a nova senha', 'is-invalid');
+					else if($("#nova_senha").val() != $("#confirmar_nova_senha").val())
+						Main.show_error("confirmar_nova_senha", 'Senha especificada é diferente da anterior', 'is-invalid');
+					else
+						Main.create_edit();
+				}
+				else
+					Main.create_edit();
+			}
+		}
+	},
+	menu_validar : function()
+	{
+		if($("#nome").val() == "")
+			Main.show_error("nome", 'Informe o nome de menu', 'is-invalid');
+		else if($("#ordem").val() == "")
+			Main.show_error("ordem", 'Informe o número da ordem', 'is-invalid');
+		else
+			Main.create_edit();
+	},
+	modulo_validar : function()
+	{
+		if($("#nome").val() == "")
+			Main.show_error("nome", 'Informe o nome de módulo', 'is-invalid');
+		else if($("#descricao").val() == "")
+			Main.show_error("descricao", 'Informe a descrição de módulo', 'is-invalid');
+		else if($("#url_modulo").val() == "")
+			Main.show_error("url_modulo", 'Informe a url de módulo', 'is-invalid');
+		else if($("#ordem").val() == "")
+			Main.show_error("ordem", 'Informe o número da ordem', 'is-invalid');
+		else
+			Main.create_edit();
 	},
 	id_registro : "",
 	confirm_delete : function(id){
@@ -142,124 +211,5 @@ var Main = {
 				location.reload();
 			}
 		});
-	},
-	turma_validar : function (){
-		Main.create_edit_turma();
-	},
-	disciplina_turma_validar : function (){
-		Main.create_edit_turma_disciplina();
-	},
-	aluno_turma_validar : function(){
-		Main.create_edit_turma_aluno();
-	},
-	create_edit_turma : function (){
-		$("#mensagem").html("Aguarde... processando dados");
-		$('#admin_modal').modal({
-			keyboard: false,
-			backdrop : 'static'
-		})
-		$.ajax({
-			url: Main.base_url+$("#controller").val()+'/store',
-			data: $("#"+$("form[name=form_cadastro]").attr("id")).serialize(),
-			dataType:'json',
-			cache: false,
-			type: 'POST',
-			success: function (msg) {
-				$("#mensagem").html("Dados salvos com sucesso");
-				window.location.assign(Main.base_url+msg.page);
-			}
-		});
-	},
-	create_edit_turma_disciplina : function (){
-		$("#mensagem").html("Aguarde... processando dados");
-		$('#admin_modal').modal({
-			keyboard: false,
-			backdrop : 'static'
-		})
-		$.ajax({
-			url: Main.base_url+$("#controller").val()+'/store_disciplina',
-			data: $("#form_cadastro").serialize(),
-			dataType:'json',
-			cache: false,
-			type: 'POST',
-			success: function (msg) {
-				$("#mensagem").html("Dados salvos com sucesso");
-				window.location.assign(Main.base_url+msg.page);
-			}
-		});
-	},
-	create_edit_turma_aluno : function (){
-		$("#mensagem").html("Aguarde... processando dados");
-		$('#admin_modal').modal({
-			keyboard: false,
-			backdrop : 'static'
-		})
-		$.ajax({
-			url: Main.base_url+$("#controller").val()+'/store_aluno',
-			data: $("#form_cadastro").serialize(),
-			dataType:'json',
-			cache: false,
-			type: 'POST',
-			success: function (msg) {
-				$("#mensagem").html("Dados salvos com sucesso");
-				window.location.assign(Main.base_url+msg.page);
-			}
-		});
-	},
-	validar_turma_origem : function(){
-		if($("#TurmaId").val() == "0")
-			Main.show_error("TurmaId","error-turma","Selecione uma turma para continuar","form-control is-invalid");
-		else
-			window.location.assign(Main.base_url+"turma/trocar_aluno/"+$("#TurmaId").val());
-			
-	},
-	troca_aluno_validar : function (){
-		if($("#TurmaId").val() == "0")
-			Main.show_error("TurmaId","error-turma","Selecione uma turma de destino","form-control is-invalid");
-		var checado = $("#form_cadastro_troca_aluno").find("input[name='alunos[]']:checked").length > 0;
-		if(checado == 1)
-			Main.troca_aluno();
-	},
-	troca_aluno : function(){
-		$.ajax({
-			url: Main.base_url+$("#controller").val()+'/store_troca_aluno',
-			data: $("#form_cadastro_troca_aluno").serialize(),
-			dataType:'json',
-			cache: false,
-			type: 'POST',
-			success: function (msg) {
-				$("#mensagem").html("Dados salvos com sucesso");
-				window.location.assign(Main.base_url+"/turma/index");
-			}
-		});
-	},
-	lista_turma : function(curso){
-		window.location.assign(Main.base_url+"boletim/turmas/"+curso);
-	},
-	lista_alunos : function(turma){
-		window.location.assign(Main.base_url+"boletim/alunos/"+turma);
-	},
-	atualiza_boletim : function(aluno,disciplina,bimestre,valor,boletim_id,campo){
-		if(valor != "" && valor != " ")
-		{
-			$("#mensagem").html("Aguarde... processando dados");
-			$('#admin_modal').modal({
-				keyboard: false,
-				backdrop : 'static'
-			})
-			$.ajax({
-				url: Main.base_url+$("#controller").val()+'/atualiza_boletim/'+aluno+"/"+disciplina+"/"+bimestre+"/"+valor+"/"+boletim_id+"/"+campo,
-				dataType:'json',
-				cache: false,
-				type: 'POST',
-				success: function (msg) {
-					
-					$("#mensagem").html("Dados salvos com sucesso");
-					setTimeout(function(){
-						$("#admin_modal").modal('hide');
-					},500);
-				}
-			});
-		}
 	}
 };

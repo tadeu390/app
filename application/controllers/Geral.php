@@ -8,6 +8,7 @@
 			parent::__construct();
 			$this->load->model('login_model');
 			$this->load->model('Menu_model');
+			$this->load->model('Modulo_model');
 			$this->load->helper('url_helper');
 			$this->load->helper('url');
 			$this->load->helper('html');
@@ -18,8 +19,8 @@
 
 		public function set_menu()
 		{
-			$this->data['grupo'] = $this->Menu_model->get_grupo_menu();
 			$this->data['menu'] = $this->Menu_model->get_menu();
+			$this->data['modulo'] = $this->Modulo_model->get_modulo();
 		}
 	}
 ?>

@@ -1,0 +1,61 @@
+<?php
+	class Modulo_model extends CI_Model {
+
+		public function __construct()
+		{
+			$this->load->database();
+		}
+		
+		public function get_modulo()//usado apenas para montar o menu
+		{
+			$query = $this->db->query("SELECT mo.nome as nome_modulo, mo.id as id_modulo,
+										mo.menu_id, mo.url as url_modulo, mo.icone 
+										FROM modulo mo 
+										WHERE mo.ativo = 1 ORDER BY mo.ordem");
+			return $query->result_array();
+		}
+		
+		public function get_modulo_tela($id = false)
+		{
+			if($id === false)
+			{
+				$query = $this->db->query("SELECT me.nome AS nome_menu, mo.descricao, mo.ativo, mo.ordem, 
+											DATE_FORMAT(mo.data_registro, '%d/%m/%Y') as data_registro,
+											mo.nome as nome_modulo, mo.id, mo.url as url_modulo, 
+											mo.icone 
+											FROM menu me 
+											RIGHT JOIN modulo mo ON me.Id = mo.menu_id 
+											ORDER BY mo.data_registro DESC");
+				return $query->result_array();
+			}
+			$query = $this->db->query("SELECT me.nome AS nome_menu, mo.descricao, mo.ativo, mo.ordem, 
+											DATE_FORMAT(mo.data_registro, '%d/%m/%Y') as data_registro,
+											mo.nome as nome_modulo, mo.id, mo.url as url_modulo, mo.menu_id,  
+											mo.icone 
+											FROM menu me 
+											RIGHT JOIN modulo mo ON me.Id = mo.menu_id 
+											WHERE mo.id = ".$this->db->escape($id)." 
+											ORDER BY mo.ordem, me.ordem");
+			return $query->row_array();
+		}
+		
+		public function deletar($id)
+		{
+			return $this->db->query("UPDATE modulo SET ativo = 0 
+										WHERE id = ".$this->db->escape($id)."");
+		}
+		
+		public function set_modulo($data)
+		{
+			if($data['menu_id'] == "0")
+				$data['menu_id'] = null;
+			if(empty($data['id']))
+				return $this->db->insert('modulo',$data);
+			else
+			{
+				$this->db->where('id', $data['id']);
+				return $this->db->update('modulo', $data);
+			}
+		}
+	}
+?>

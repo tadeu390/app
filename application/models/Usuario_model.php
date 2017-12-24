@@ -44,5 +44,23 @@
 				return $this->db->update('usuario', $data);
 			}
 		}
+		
+		public function get_grupo($id)
+		{
+			$query = $this->db->query("SELECT grupo_id FROM usuario 
+										WHERE id = ".$this->db->escape($id)."");
+			return $query->row_array()['grupo_id'];
+		}
+		
+		public function email_valido($email,$id)
+		{
+			$query = $this->db->query("SELECT email FROM usuario 
+										WHERE email = ".$this->db->escape($email)."");
+			$query = $query->row_array();
+			
+			if(!empty($query) && $this->get_usuario($id)['email'] != $query['email'])
+				return "invalido";
+			return "valido";
+		}
 	}
 ?>

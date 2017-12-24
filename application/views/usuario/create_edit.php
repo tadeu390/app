@@ -24,17 +24,29 @@
 				<div class='form-group'>
 					<div class='input-group mb-2 mb-sm-0'>
 						<div class='input-group-addon' style="width: 180px;">E-mail</div>
-						<input name='email_usuario' id='email_usuario' value='<?php echo (!empty($obj['email']) ? $obj['email']:''); ?>' type='text' class='form-control' />
-					</div>
+						<input name='email' id='email' value='<?php echo (!empty($obj['email']) ? $obj['email']:''); ?>' type='text' class='form-control' />
+					</div> 
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-email'></div>
 				</div>
 				<div class='form-group'>
 					<div class='input-group mb-2 mb-sm-0'>
 						<div class='input-group-addon' style="width: 180px;">Senha</div>
-						<input name='senha_usuario' id='senha_usuario' value='<?php echo (!empty($obj['senha']) ? $obj['senha']:''); ?>' type='password' class='form-control' />
+						<input name='senha' id='senha' <?php echo $read; ?> value='<?php echo (!empty($obj['senha']) ? $obj['senha']:''); ?>' type='password' class='form-control' />
 					</div>
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-senha'></div>
 				</div>
+				<?php 
+					if(empty($obj['id']))
+					{
+						echo"<div class='form-group'>";
+							echo"<div class='input-group mb-2 mb-sm-0'>";
+								echo"<div class='input-group-addon' style='width: 180px;'>Confirmar Senha</div>";
+								echo"<input name='confirmar_senha' id='confirmar_senha' value='".(!empty($obj['senha']) ? $obj['senha']:'')."' type='password' class='form-control' />";
+							echo"</div>";
+							echo"<div class='input-group mb-2 mb-sm-0 text-danger' id='error-confirmar_senha'></div>";
+						echo"</div>";
+					}
+				?>
 				<div class='form-group'>
 					<div class='input-group mb-2 mb-sm-0'>
 						<div class='input-group-addon' style="width: 180px;">Tipo de usuário</span></div>
@@ -53,6 +65,30 @@
 					</div>
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-grupo_id'></div>
 				</div>
+				
+				<?php 
+					if(!empty($obj['id']))
+					{
+						echo"<fieldset>";
+							echo"<legend>Alterar senha</legend>";
+							echo"<div class='form-group'>";
+								echo"<div class='input-group mb-2 mb-sm-0'>";
+									echo"<div class='input-group-addon' style='width: 180px;'>Nova senha</div>";
+									echo"<input name='nova_senha' id='nova_senha' value='' type='password' class='form-control' />";
+								echo"</div>";
+								echo"<div class='input-group mb-2 mb-sm-0 text-danger' id='error-nova_senha'></div>";
+							echo"</div>";
+							echo"<div class='form-group'>";
+								echo"<div class='input-group mb-2 mb-sm-0'>";
+									echo"<div class='input-group-addon' style='width: 180px;'>Confirmar senha</div>";
+									echo"<input name='confirmar_senha' id='confirmar_nova_senha' value='' type='password' class='form-control' />";
+								echo"</div>";
+								echo"<div class='input-group mb-2 mb-sm-0 text-danger' id='error-confirmar_nova_senha'></div>";
+							echo"</div>";
+						echo"</fieldset>";
+					}
+				?>
+				
 				<div class='form-group'>
 					<div class='checkbox checbox-switch switch-success custom-controls-stacked'>
 						<?php
@@ -68,7 +104,7 @@
 				</div>
 				
 				<?php
-					if(!isset($obj['id']))
+					if(empty($obj['id']))
 						echo"<input type='submit' class='btn btn-danger btn-block' style='width: 200px;' value='Cadastrar'>";
 					else
 						echo"<input type='submit' class='btn btn-danger btn-block' style='width: 200px;' value='Atualizar'>";
