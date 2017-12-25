@@ -10,10 +10,7 @@
 				<script type="text/javascript" src="<?php echo $url; ?>content/js/Main.js"></script>
 				<script type="text/javascript" src="<?php echo $url; ?>content/js/Chart.js"></script>
 				<script type="text/javascript" src="<?php echo $url; ?>content/js/legend.js"></script>
-	
-				<div class="container-fluid text-center" style='background-color: rgba(0,0,0,.5); width: 100%;color: white; position: fixed;z-index:-1; bottom: 0px; right: 0px;padding: 15px;'>
-					&copy;  <?php echo date("Y"); ?> - Advansoftware
-				</div>	
+
 			</div>
 		</body> 
 </html>

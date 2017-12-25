@@ -38,8 +38,8 @@
 		*/
 		public function validar()
 		{ 
-			$email = $this->input->post('email');
-			$senha = $this->input->post('senha');
+			$email = $this->input->post('email-login');
+			$senha = $this->input->post('senha-login');
 			$response = $this->login_model->get_login($email,$senha);
 			$data['title'] = 'Login';
 			

@@ -57,11 +57,11 @@ var Main = {
 	},
 	login_isvalid : function (){
 		if($("#email").val() == "")
-			Main.show_error("email","error-email","Informe seu e-mail","form-control is-invalid");
-		else if(Main.valida_email($("#email").val()) == false)
-			Main.show_error("email","error-email","Formato de e-mail inválido","form-control is-invalid");
-		else if($("#senha").val() == "")
-			Main.show_error("senha","error-senha","Insira sua senha","form-control is-invalid");
+			Main.show_error("email-login","Informe seu e-mail","");
+		else if(Main.valida_email($("#email-login").val()) == false)
+			Main.show_error("email-login","Formato de e-mail inválido","");
+		else if($("#senha-login").val() == "")
+			Main.show_error("senha-login","Insira sua senha","");
 		else
 			return true;
 	},
@@ -86,7 +86,8 @@ var Main = {
 	},
 	show_error : function(form, error, class_error)
 	{
-		document.getElementById(form).className = "form-control "+class_error;
+		if(class_error != "")
+			document.getElementById(form).className = "form-control "+class_error;
 		document.getElementById("error-"+form).innerHTML = error;
 	},
 	limpa_login : function ()

@@ -4,8 +4,23 @@ $(document).ready(
 
 		Main.load_mask();
 		//event for form login
-	    $('#bt_login').click(function() { 
+	    $( "#form_login").submit(function( event ) {
+			event.preventDefault();
 			Main.login();
+		});
+		
+		$('#email-login').blur(function() { 
+			if(this.value != '')
+			{
+				if(Main.valida_email(this.value) == false)
+					Main.show_error("email-login", 'Formato de e-mail inválido', '');
+				else
+					Main.show_error("email-login", '', '');
+			}
+		}); 
+		
+		$('#senha-login').blur(function() { 
+			if(this.value != '') Main.show_error("senha-login", '', '');
 		});
 		
 		$('#nome').blur(function() { 
