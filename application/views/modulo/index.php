@@ -3,7 +3,7 @@
 		
 		//document.getElementById('menu_turma').className = "active";
 	}
-</script>
+</script> 
 <div class='row' style='padding: 30px;'>
 	<p>Todos os módulos</p><br />
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
@@ -31,7 +31,10 @@
 					echo "<tbody>";
 						for($i = 0; $i < count($lista_modulos); $i++)
 						{
-							echo "<tr>";
+							$cor = "";
+							if($lista_modulos[$i]['ativo'] == 0)
+								$cor = "class='table-danger'";
+							echo "<tr $cor>";
 								echo "<td>".$lista_modulos[$i]['nome_modulo']."</td>";
 								echo "<td>".$lista_modulos[$i]['descricao']."</td>";
 								echo "<td>".(($lista_modulos[$i]['ativo'] == 1) ? 'Sim' : 'Não')."</td>";

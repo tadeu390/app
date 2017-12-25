@@ -209,11 +209,13 @@ input.input-material ~ label.active {
 }
 
 .input-group-addon {
-  background: #363a40;
-  color: #8a8d93;
-  font-weight: 300;
-  border-radius: 0;
-  border: 1px solid #444951;
+  /*background: #363a40;*/
+ background: rgba(255,255,255,0);
+  color: #fff;
+  /*font-weight: 300;
+  border-radius: 0;*/
+ padding: 0px;
+  border: 1px solid rgba(255,255,255,0);
 }
 
 .input-group .btn {

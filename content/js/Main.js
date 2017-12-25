@@ -56,7 +56,7 @@ var Main = {
 		});
 	},
 	login_isvalid : function (){
-		if($("#email").val() == "")
+		if($("#email-login").val() == "")
 			Main.show_error("email-login","Informe seu e-mail","");
 		else if(Main.valida_email($("#email-login").val()) == false)
 			Main.show_error("email-login","Formato de e-mail inválido","");

@@ -10,7 +10,7 @@
 							echo form_open('login/validar',$atr);
 						?>
 							<div class="form-group">
-								<input id="email-login" name="email-login" type="text" class="input-material">
+								<input id="email-login" autocomplete="false" spellcheck="false" name="email-login" type="text" class="input-material">
 								<label for="email-login" class="label-material">E-mail</label>
 								<div class='input-group mb-2 mb-sm-0 text-danger' id='error-email-login'></div>
 							</div>
