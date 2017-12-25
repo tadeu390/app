@@ -1,3 +1,31 @@
+<div class="modal fade" id="login_modal_aguardar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body text-center">
+		Aguarde... validando seus dados.
+      </div>
+      <div class="modal-footer text-center" style='display: block;'>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="login_modal_erro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body text-center">
+		E-mail e/ou senha inválidos
+      </div>
+      <div class="modal-footer text-center" style='display: block;'>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="login-page">
 	<div class="container d-flex align-items-center">
 	<div class="form-holder has-shadow">
