@@ -1,30 +1,28 @@
-<script type='text/javascript'>
-	window.onload = function(){
-		
-		//document.getElementById('menu_obj').className = "active";
-	}
-</script>
 <div class='row' style='padding: 30px;'>
-		<div class='col-lg-8 offset-lg-2'>
-		<p><?php if(isset($obj['id'])) echo"Editar grupo"; else echo"Novo grupo";  ?></p><br />
-		<?php
-			$atr = array('id' => 'form_cadastro_grupo','name' => 'form_cadastro');
-			echo form_open("$controller/store",$atr);
-		?>
-			<br />
+		<div class='col-lg-8 offset-lg-2 padding' style="background: #393836;">
+			<div>
+				<a href='javascript:window.history.go(-1)' title='Voltar'>
+					<span class='glyphicon glyphicon-arrow-left' style='font-size: 35px; color: white;'></span>
+				</a>
+			</div>
+			<div>
+				<p class="text-center padding" style='color: white;'><?php echo((isset($obj['id'])) ? 'Editar grupo' : 'Novo grupo'); ?></p>					
+			</div>
+			<?php $atr = array("id" => "form_cadastro_$controller", "name" => "form_cadastro"); 
+				echo form_open("$controller/store", $atr); 
+			?>
+			
 				<input type='hidden' id='id' name='id' value='<?php if(!empty($obj['id'])) echo $obj['id']; ?>'/>
 				<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 				<div class='form-group'>
-					<div class='input-group mb-2 mb-sm-0'>
-						<div class='input-group-addon' style="width: 180px;">Nome</div>
+						<div class='input-group-addon'>Nome</div>
 						<input name='nome' id='nome' value='<?php echo (!empty($obj['nome_grupo']) ? $obj['nome_grupo']:''); ?>' type='text' class='form-control' autofocus />
-					</div>
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-nome'></div>
 				</div>
 				<div class='form-group'>
 				<?php
 				echo "<div class='table-responsive'>";
-					echo "<table class='table table-striped table-hover'>";
+					echo "<table class='table table-striped table-hover' style='color: white;'>";
 						echo"<thead>";
 							echo "<tr>";
 								echo "<td>Módulo</td>";
@@ -97,7 +95,7 @@
 							if($obj['ativo'] == 1)
 								$checked = "checked";
 							
-							echo"<label for='grupo_ativo'>";
+							echo"<label for='grupo_ativo' style='color: white;'>";
 								echo "<input type='checkbox' $checked id='grupo_ativo' name='grupo_ativo' value='1' /><span></span> Grupo ativo";
 							echo"</label>";
 						?>

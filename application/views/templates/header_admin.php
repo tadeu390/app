@@ -29,26 +29,33 @@
 		<div class='container-fluid'>
 			<nav class="side-navbar">
 				<div class="sidenav-header d-flex align-items-center justify-content-center">
-					<div class="sidenav-header-inner  text-center"><img src="<?php echo $url; ?>content/imagens/logo.png" alt="CEP" class="img-fluid rounded-circle">
-						<h2>CEP - Admin</h2>
+					<div class="sidenav-header-inner  text-center">
+						<h2>Admin</h2> <br />
 					</div>
 					<div style="margin-top: 15px;" class="sidenav-header-logo"><a href="#" class="brand-small text-center">
-						<strong>CEP</strong></a>
+						<strong>AD</strong></a>
 					</div>
 				</div>
 				<div class="main-menu">
 					<ul id="side-main-menu" class="side-menu list-unstyled">
 					<?php
 						for ($i = 0; $i < count($menu); $i++) {
+							$status = "false";
+							$classe = "collapse list-unstyled";
+							if($menu_selectd == $menu[$i]['id'])
+							{
+								$status = "true";
+								$classe = "collapse list-unstyled show";
+							}
 							echo "<li>";
-							echo "<a href='#pages-nav-list" . $i . "' data-toggle='collapse' aria-expanded='false'>";
+							echo "<a href='#pages-nav-list" . $i . "' data-toggle='collapse' aria-expanded='".$status."'>";
 							echo "<i class='icon-interface-windows'></i>";
 							echo "<span>" . $menu[$i]['nome'] . "</span>";
 							echo "<div class='arrow pull-right'>";
 							echo "<i class='fa fa-angle-down'></i>";
 							echo "</div>";
 							echo "</a>";
-							echo "<ul id='pages-nav-list" . $i . "' class='collapse list-unstyled'>";
+							echo "<ul id='pages-nav-list" . $i . "' class='".$classe."'>";
 							for ($j = 0; $j < count($modulo); $j++)
 								if ($menu[$i]['id'] == $modulo[$j]['menu_id'])
 									echo "<li><a href='" . $url . "index.php/" . $modulo[$j]['url_modulo'] . "'><i class='" . $modulo[$j]['icone'] . "' style='margin-bottom: 10px;'></i>" . $modulo[$j]['nome_modulo'] . "</a></li>";

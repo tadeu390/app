@@ -9,6 +9,7 @@
 			$this->load->model('login_model');
 			$this->load->model('Menu_model');
 			$this->load->model('Modulo_model');
+			$this->load->model('Geral_model');
 			$this->load->helper('url_helper');
 			$this->load->helper('url');
 			$this->load->helper('html');

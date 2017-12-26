@@ -1,28 +1,19 @@
-<script type='text/javascript'>
-	window.onload = function(){
-		
-		//document.getElementById('menu_turma').className = "active";
-	}
-</script>
-<div class='row' style='padding: 30px; padding-bottom: 0px;'>
-	<p>
-		Detalhes do módulo selecionado
-	</p>
-	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
-</div>
-<div class='row'  style='padding-left: 40px;'>
-	<?php 
-		echo"<a href='javascript:window.history.go(-1)' class='link' title='Voltar'>";
-			echo"<span class='glyphicon glyphicon-arrow-left' style='transform: scale(2);'></span>";
-		echo"</a>"; 
-	?>
-</div>
-<br />
-<div class='row' id='container' name='container' style='border: 1px solid rgba(0,0,0,.1);'>
+<br /><br />
+<div class='row' id='container' name='container'>
 	<?php
-		echo "<div class='col-lg-10 offset-lg-1'>";
+		echo "<div class='col-lg-10 offset-lg-1' style='background: #393836;'>";
+			echo"<a href='javascript:window.history.go(-1)' class='link padding' title='Voltar'>";
+				echo"<span class='glyphicon glyphicon-arrow-left' style='font-size: 35px; color: white;'></span>";
+			echo"</a>";
 			echo "<div class='table-responsive'>";
-				echo "<table class='table table-striped table-hover'>";
+				echo "<table class='table table-striped table-hover' style='color: white;'>";
+					echo"<tr>";
+						echo "<td colspan='2'>";
+							echo"<p  class='text-center' style='margin-top: 10px; color: white;'>";
+								echo"Detalhes do módulo selecionado";
+							echo"</p>";
+						echo"</td>";
+					echo"</tr>";
 					echo"</tr>";
 					echo "<tr>";
 						echo "<td>Nome</td>";

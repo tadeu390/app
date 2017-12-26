@@ -1,15 +1,16 @@
-<script type='text/javascript'>
-	window.onload = function() {
-
-		//document.getElementById('menu_obj').className = "active";
-	}
-</script>
 <div class='row' style='padding: 30px;'>
 		<div class='col-lg-8 offset-lg-2 padding' style="background: #393836;">
-		<p class="text-center padding" style='color: white;'><?php echo((isset($obj['id'])) ? 'Editar módulo' : 'Novo módulo'); ?></p>
-			<?php $atr = array('id' => 'form_cadastro_modulo', 'name' => 'form_cadastro'); ?>
-			<?echo form_open("$controller/store", $atr); ?>
-							
+			<div>
+				<a href='javascript:window.history.go(-1)' title='Voltar'>
+					<span class='glyphicon glyphicon-arrow-left' style='font-size: 35px; color: white;'></span>
+				</a>
+			</div>
+			<div>
+				<p class="text-center padding" style='color: white;'><?php echo((isset($obj['id'])) ? 'Editar módulo' : 'Novo módulo'); ?></p>					
+			</div>
+			<?php $atr = array("id" => "form_cadastro_$controller", "name" => "form_cadastro"); 
+				echo form_open("$controller/store", $atr); 
+			?>
 				<input type='hidden' id='id' name='id' value='<?php echo (!empty($obj['id']) ? $obj['id'] :'' )?>'/>
 				<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 				<div class='form-group'>

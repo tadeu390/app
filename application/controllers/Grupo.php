@@ -12,6 +12,7 @@
 			$this->load->model('Grupo_model');
 			$this->set_menu();
 			$this->data['controller'] = get_class($this);
+			$this->data['menu_selectd'] = $this->Geral_model->get_identificador_menu(strtolower(get_class($this)));
 		}
 		
 		/*

@@ -13,7 +13,12 @@
 								usuario WHERE email = ".$this->db->escape($email)." AND senha = ".$this->db->escape($senha)."");
 			 $data =  $query->row_array();
 			 if(!empty($data))
+			 {
+				 //atualizar ultimo acesso
+				 $query = $this->db->query("UPDATE usuario SET ultimo_acesso = NOW()  
+				 					WHERE id = ".$this->db->escape($data['id'])."");
 				 $dataResult = $data['id'];
+			 }
 			return $dataResult;
 		}
 		

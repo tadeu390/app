@@ -20,7 +20,7 @@
 
 			$query =  $this->db->query("SELECT u.id, u.nome as nome_usuario, u.email, u.senha, u.ativo, 
 										DATE_FORMAT(u.data_registro, '%d/%m/%Y') as data_registro, 
-										DATE_FORMAT(u.ultimo_acesso, '%d/%m/%Y') as ultimo_acesso, 
+										DATE_FORMAT(u.ultimo_acesso, '%d/%m/%Y - %r') as ultimo_acesso, 
 										g.nome AS nome_grupo, u.grupo_id  
 											FROM usuario u 
 										LEFT JOIN grupo g ON u.grupo_id = g.id
