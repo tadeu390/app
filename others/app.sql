@@ -49,7 +49,6 @@ CREATE TABLE modulo(
 CREATE TABLE acesso(
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	ativo BOOLEAN,
 	modulo_id INT,
 	criar BOOLEAN,
 	visualizar BOOLEAN,
@@ -62,7 +61,7 @@ CREATE TABLE acesso(
 		FOREIGN KEY(grupo_id) REFERENCES grupo(id)
 );
 
-INSERT INTO grupo(nome) VALUES('Administrador');
+INSERT INTO grupo(nome,ativo) VALUES('Administrador',1);
 INSERT INTO usuario (nome,email,senha,ativo,grupo_id) VALUES(
 					'Admin','admin@dominio.com.br','admin123',1,1);
 
@@ -71,3 +70,4 @@ INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Módu
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Menus',1,'Lista de menus','fa fa-navicon',1,'Menu');
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Grupos',1,'Lista de grupos','fa fa-th-large',1,'Grupo');
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Usuários',1,'Lista de usuários','glyphicon glyphicon-user',1,'Usuario');
+INSERT INTO acesso(modulo_id,criar,visualizar,atualizar,apagar,grupo_id) VALUES(1,1,1,1,1,1);
