@@ -49,7 +49,8 @@
 			else if(!empty($response))
 			{
 				$login = array(
-				   'id'  => $response
+				   'id'  => $response['id'],
+				   'grupo_id'  => $response['grupo_id']
 				);
 				$this->session->set_userdata($login);
 				$response = 'valido';

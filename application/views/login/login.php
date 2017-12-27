@@ -57,6 +57,6 @@
 	</div>
 	</div>
 	<div class="copyrights text-center">
-		<p> <?php echo date("Y");?>  - Developer by Tadeu R. Torres</p>
+		<p> <?php echo date("Y");?>  - Developed by Tadeu R. Torres</p>
 	</div>
 </div>

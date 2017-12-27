@@ -58,7 +58,7 @@
 							echo "<ul id='pages-nav-list" . $i . "' class='".$classe."'>";
 							for ($j = 0; $j < count($modulo); $j++)
 								if ($menu[$i]['id'] == $modulo[$j]['menu_id'])
-									echo "<li><a href='" . $url . "index.php/" . $modulo[$j]['url_modulo'] . "'><i class='" . $modulo[$j]['icone'] . "' style='margin-bottom: 10px;'></i>" . $modulo[$j]['nome_modulo'] . "</a></li>";
+									echo "<li><a href='" . $url . $modulo[$j]['url_modulo'] . "'><i class='" . $modulo[$j]['icone'] . "' style='margin-bottom: 10px;'></i>" . $modulo[$j]['nome_modulo'] . "</a></li>";
 							echo "</ul>";
 							echo "</li>";
 						}

@@ -1,4 +1,10 @@
 <?php
+
+define("CREATE",'criar');
+define("READ",'visualizar');
+define("UPDATE",'atualizar');
+define("DELETE",'apagar');
+
 	class Geral extends CI_Controller 
 	{
 		protected $data;
@@ -22,6 +28,13 @@
 		{
 			$this->data['menu'] = $this->Menu_model->get_menu();
 			$this->data['modulo'] = $this->Modulo_model->get_modulo();
+		}
+		
+		public function view($v,$dt)
+		{
+			$this->load->view('templates/header_admin',$dt);
+			$this->load->view($v,$dt);
+			$this->load->view('templates/footer',$dt);
 		}
 	}
 ?>

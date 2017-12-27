@@ -25,7 +25,7 @@
 				</div>
 				<div class='form-group'>
 						<div class='input-group-addon'>Senha</div>
-						<input name='senha' id='senha' <?php echo $read; ?> value='<?php echo (!empty($obj['senha']) ? $obj['senha']:''); ?>' type='password' class='form-control' />
+						<input name='senha' id='senha' <?php echo (isset($read) ? $read : ''); ?> value='<?php echo (!empty($obj['senha']) ? $obj['senha']:''); ?>' type='password' class='form-control' />
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-senha'></div>
 				</div>
 				<?php 

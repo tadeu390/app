@@ -22,48 +22,72 @@
 		public function index()
 		{
 			$this->data['title'] = 'Administração - dashboard';
-			$this->data['usuarios'] = $this->Usuario_model->get_usuario();
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('usuario/index',$this->data);
-			$this->load->view('templates/footer',$this->data);
-		}
-		
-		public function deletar($id)
-		{
-			$this->Usuario_model->deletar($id);
-		}
-		
-		public function detalhes($id)
-		{
-			$this->data['title'] = 'Usuario - Detalhes';
-			$this->data['obj'] = $this->Usuario_model->get_usuario($id);
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('usuario/detalhes',$this->data);
-			$this->load->view('templates/footer',$this->data);
-		}
-		
-		public function create_edit($id)
-		{
-			$this->data['title'] = 'Usuario - Cadastro';
 			
-			$this->data['obj'] = $this->Usuario_model->get_usuario($id);
-			
-			$this->data['read'] = ""; //para deixar como somente leitura o campo de senha, caso o usuario logado seja um adm
-			if($id > 0 && $this->Usuario_model->get_grupo($this->session->id) > 1)
-				$this->data['obj']['senha'] = "";
-			if($id > 0 && $this->Usuario_model->get_grupo($this->session->id) == 1)
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
 			{
-				$this->data['obj']['senha'] = "xxx";
-				$this->data['read'] = "readonly='readonly'";
+				$this->data['usuarios'] = $this->Usuario_model->get_usuario();
+				$this->view("usuario/index",$this->data);
 			}
-			
-			$this->data['grupos_usuario'] = $this->Grupo_model->get_grupo();
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('usuario/create_edit',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function deletar($id = false)
+		{
+			if($this->Geral_model->get_permissao(DELETE,get_class($this)) == true)
+				$this->Usuario_model->deletar($id);
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function detalhes($id = false)
+		{
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['title'] = 'Usuario - Detalhes';
+				$this->data['obj'] = $this->Usuario_model->get_usuario($id);
+				$this->view("usuario/detalhes",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function create()
+		{
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Usuario_model->get_usuario(0);
+				$this->data['title'] = 'Usuario - Cadastro';
+				$this->data['grupos_usuario'] = $this->Grupo_model->get_grupo();
+				$this->view("usuario/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function edit($id = false)
+		{
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['title'] = 'Usuario - Cadastro';
+				
+				$this->data['obj'] = $this->Usuario_model->get_usuario($id);
+				
+				$this->data['read'] = ""; //para deixar como somente leitura o campo de senha, caso o usuario logado seja um adm
+				if($id > 0 && $this->Usuario_model->get_grupo($this->session->id) > 1)
+					$this->data['obj']['senha'] = "";
+				if($id > 0 && $this->Usuario_model->get_grupo($this->session->id) == 1)
+				{
+					$this->data['obj']['senha'] = "xxx";//qualquer coisa, so pra nao deixar o campo de senha vazio
+					$this->data['read'] = "readonly='readonly'";
+				}
+				
+				$this->data['grupos_usuario'] = $this->Grupo_model->get_grupo();
+	
+				$this->view("usuario/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
 		public function store()

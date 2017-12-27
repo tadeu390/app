@@ -65,3 +65,9 @@ CREATE TABLE acesso(
 INSERT INTO grupo(nome) VALUES('Administrador');
 INSERT INTO usuario (nome,email,senha,ativo,grupo_id) VALUES(
 					'Admin','admin@dominio.com.br','admin123',1,1);
+
+INSERT INTO menu(ativo,nome,ordem) VALUES(1,'Administrativo',1);
+INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Módulos',1,'Lista de módulos','fa fa-list-alt',1,'Modulo');
+INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Menus',1,'Lista de menus','fa fa-navicon',1,'Menu');
+INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Grupos',1,'Lista de grupos','fa fa-th-large',1,'Grupo');
+INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Usuários',1,'Lista de usuários','glyphicon glyphicon-user',1,'Usuario');

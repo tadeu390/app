@@ -1,5 +1,5 @@
 var Main = {
-	base_url : "http://"+window.location.host+"/git/app/index.php/",
+	base_url : "http://"+window.location.host+"/git/app/",
 	load_mask : function(){
 		$(document).ready(function(){
 			$('[data-toggle="popover"]').popover(),

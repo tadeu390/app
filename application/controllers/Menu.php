@@ -17,28 +17,47 @@
 		*/
 		public function index()
 		{
-			$this->data['title'] = 'Administração - Menus';
-			$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('menu/index',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
+			{	
+				$this->data['title'] = 'Administração - Menus';
+				
+				$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
+				$this->view("menu/index",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function deletar($id)
+		public function deletar($id = false)
 		{
-			$this->Menu_model->deletar($id);
+			if($this->Geral_model->get_permissao(DELETE,get_class($this)) == true)
+				$this->Menu_model->deletar($id);
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function create_edit($id)
+		public function edit($id = false)
 		{
 			$this->data['title'] = 'Menu - Cadastro';
-			
-			$this->data['obj'] = $this->Menu_model->get_menu_tela($id);
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('menu/create_edit',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Menu_model->get_menu_tela($id);
+				$this->view("menu/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function create()
+		{
+			$this->data['title'] = 'Menu - Cadastro';
+			if($this->Geral_model->get_permissao(CREATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Menu_model->get_menu_tela($id);
+				$this->view("menu/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
 		public function store()

@@ -17,28 +17,50 @@
 		*/
 		public function index()
 		{
-			$this->data['title'] = 'Administração - Módulos';
-			$this->data['lista_modulos'] = $this->Modulo_model->get_modulo_tela();
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('modulo/index',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
+			{
+				$this->data['title'] = 'Administração - Módulos';
+				$this->data['lista_modulos'] = $this->Modulo_model->get_modulo_tela();
+				$this->view("modulo/index",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function deletar($id)
+		public function deletar($id = false)
 		{
-			$this->Modulo_model->deletar($id);
+			if($this->Geral_model->get_permissao(DELETE,get_class($this)) == true)	
+				$this->Modulo_model->deletar($id);
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function create_edit($id)
+		public function edit($id = false)
 		{
 			$this->data['title'] = 'Módulo - Cadastro';
-			
-			$this->data['obj'] = $this->Modulo_model->get_modulo_tela($id);
-			$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
-			
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('modulo/create_edit',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Modulo_model->get_modulo_tela($id);
+				$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
+				
+				$this->view("modulo/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
+		}
+		
+		public function create()
+		{
+			$this->data['title'] = 'Módulo - Cadastro';
+			if($this->Geral_model->get_permissao(CREATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Modulo_model->get_modulo_tela($id);
+				$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
+				
+				$this->view("modulo/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
 		public function store()
@@ -66,14 +88,17 @@
 			echo json_encode($arr);
 		}
 		
-		public function detalhes($id)
+		public function detalhes($id = false)
 		{
-			$this->data['title'] = 'Módulo - Detalhes';
-			$this->data['obj'] = $this->Modulo_model->get_modulo_tela($id);
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('modulo/detalhes',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
+			{		
+				$this->data['title'] = 'Módulo - Detalhes';
+				$this->data['obj'] = $this->Modulo_model->get_modulo_tela($id);
+	
+				$this->view("modulo/detalhes",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 	}
 ?>

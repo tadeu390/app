@@ -1,3 +1,4 @@
+<?php $this->load->helper("permissao");?>
 <br /><br />
 <div class='row' id='container' name='container'>
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
@@ -13,7 +14,8 @@
 						echo"</tr>";
 						echo"<tr>";
 							echo"<td class='text-right' colspan='6'>";
-								echo"<a class='btn btn-success' href='".$url."index.php/$controller/create_edit/0/'>Novo módulo</a>";
+								if(permissao::get_permissao(CREATE,$controller))
+									echo"<a class='btn btn-success' href='".$url."$controller/create/'>Novo módulo</a>";
 							echo"</td>";
 						echo"</tr>";
 						echo "<tr>";
@@ -38,9 +40,11 @@
 								//echo "<td $cor>".$lista_modulos[$i]['ordem']."</td>";
 								echo "<td $cor>".$lista_modulos[$i]['nome_menu']."</td>";
 								echo "<td class='text-right'>";
-									echo "<a href='".$url."index.php/$controller/create_edit/".$lista_modulos[$i]['id']."' title='Editar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-edit'></a> | ";
-									echo "<a href='".$url."index.php/$controller/detalhes/".$lista_modulos[$i]['id']."' title='Detalhes' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-th'></a> | ";
-									echo "<span onclick='Main.confirm_delete(". $lista_modulos[$i]['id'] .");' id='sp_lead_trash' name='sp_lead_trash' title='Apagar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-trash'></span>";
+								if(permissao::get_permissao(UPDATE,$controller))
+									echo "<a href='".$url."$controller/edit/".$lista_modulos[$i]['id']."' title='Editar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-edit'></a> | ";
+									echo "<a href='".$url."$controller/detalhes/".$lista_modulos[$i]['id']."' title='Detalhes' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-th'></a>";
+								if(permissao::get_permissao(DELETE,$controller))
+									echo " | <span onclick='Main.confirm_delete(". $lista_modulos[$i]['id'] .");' id='sp_lead_trash' name='sp_lead_trash' title='Apagar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-trash'></span>";
 								echo "</td>";
 							echo "</tr>";
 						}

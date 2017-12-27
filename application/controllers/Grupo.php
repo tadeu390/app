@@ -21,37 +21,60 @@
 		public function index()
 		{
 			$this->data['title'] = 'Administração - dashboard';
-			$this->data['lista_grupos'] = $this->Grupo_model->get_grupo_tela();
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('grupo/index',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
+			{
+				$this->data['lista_grupos'] = $this->Grupo_model->get_grupo_tela();
+				$this->view("grupo/index",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function deletar($id)
+		public function deletar($id = false)
 		{
-			$this->Grupo_model->deletar($id);
+			if($this->Geral_model->get_permissao(DELETE,get_class($this)) == true)
+				$this->Grupo_model->deletar($id);
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function detalhes($id)
+		public function detalhes($id = false)
 		{
 			$this->data['title'] = 'Grupo - Detalhes';
-			$this->data['lista_grupos_acesso'] = $this->Grupo_model->get_grupo_acesso($id);
-			$this->data['obj'] = $this->Grupo_model->get_grupo_tela($id);
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('grupo/detalhes',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
+			{
+				$this->data['lista_grupos_acesso'] = $this->Grupo_model->get_grupo_acesso($id);
+				$this->data['obj'] = $this->Grupo_model->get_grupo_tela($id);
+				$this->view("grupo/detalhes",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
-		public function create_edit($id)
+		public function edit($id = false)
 		{
 			$this->data['title'] = 'Grupo - Cadastro';
-			$this->data['obj'] = $this->Grupo_model->get_grupo_tela($id);
-			$this->data['lista_grupos_acesso'] = $this->Grupo_model->get_grupo_acesso($id);
-
-			$this->load->view('templates/header_admin',$this->data);
-			$this->load->view('grupo/create_edit',$this->data);
-			$this->load->view('templates/footer',$this->data);
+			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Grupo_model->get_grupo_tela($id);
+				$this->data['lista_grupos_acesso'] = $this->Grupo_model->get_grupo_acesso($id);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
+			$this->view("grupo/create_edit",$this->data);
+		}
+		
+		public function create()
+		{
+			$this->data['title'] = 'Grupo - Cadastro';
+			if($this->Geral_model->get_permissao(CREATE,get_class($this)) == true)
+			{
+				$this->data['obj'] = $this->Grupo_model->get_grupo_tela($id);
+				$this->data['lista_grupos_acesso'] = $this->Grupo_model->get_grupo_acesso($id);
+				$this->view("grupo/create_edit",$this->data);
+			}
+			else
+				$this->view("templates/permissao",$this->data);
 		}
 		
 		public function store()
