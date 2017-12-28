@@ -1,6 +1,7 @@
 <?php $this->load->helper("permissao");?>
+<?php $this->load->helper("paginacao");?>
 <br /><br />
-<div class='row' id='container' name='container'>
+<div class='row' id='container' name='container' style='padding: 20px;'>
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 	<?php
 		echo "<div class='col-lg-10 offset-lg-1 padding' style='background: #393836;'>";
@@ -21,7 +22,7 @@
 						echo "<tr>";
 							echo "<td>Nome</td>";
 							//echo "<td>Descrição</td>";
-							echo "<td>Ativo</td>";
+							//echo "<td>Ativo</td>";
 							//echo "<td>Ordem</td>";
 							echo "<td>Menu</td>";
 							echo "<td class='text-right'></td>";
@@ -38,7 +39,7 @@
 								//echo "<td $cor>".$lista_modulos[$i]['descricao']."</td>";
 								echo "<td $cor>".(($lista_modulos[$i]['ativo'] == 1) ? 'Sim' : 'Não')."</td>";
 								//echo "<td $cor>".$lista_modulos[$i]['ordem']."</td>";
-								echo "<td $cor>".$lista_modulos[$i]['nome_menu']."</td>";
+								//echo "<td $cor>".$lista_modulos[$i]['nome_menu']."</td>";
 								echo "<td class='text-right'>";
 								if(permissao::get_permissao(UPDATE,$controller))
 									echo "<a href='".$url."$controller/edit/".$lista_modulos[$i]['id']."' title='Editar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-edit'></a> | ";
@@ -51,6 +52,7 @@
 					echo "</tbody>";
 				echo "</table>";
 			echo "</div>";
+			paginacao::get_paginacao($paginacao,$controller);
 		echo "</div>";
 	?>
 </div>

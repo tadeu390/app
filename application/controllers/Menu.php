@@ -15,13 +15,17 @@
 		/*
 			Renderiza o dashboard
 		*/
-		public function index()
+		public function index($page = false)
 		{
+			if($page === false)
+				$page = 1;
+			
+			$this->data['title'] = 'Administração - Menus';
 			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
-			{	
-				$this->data['title'] = 'Administração - Menus';
-				
-				$this->data['lista_menus'] = $this->Menu_model->get_menu_tela();
+			{
+				$this->data['lista_menus'] = $this->Menu_model->get_menu_tela(false,$page);
+				$this->data['paginacao']['size'] = $this->data['lista_menus'][0]['size'];
+				$this->data['paginacao']['pg_atual'] = $page;
 				$this->view("menu/index",$this->data);
 			}
 			else

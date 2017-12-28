@@ -18,12 +18,17 @@
 		/*
 			Renderiza o dashboard
 		*/
-		public function index()
+		public function index($page = false)
 		{
+			if($page === false)
+				$page = 1;
+			
 			$this->data['title'] = 'Administração - dashboard';
 			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
 			{
-				$this->data['lista_grupos'] = $this->Grupo_model->get_grupo_tela();
+				$this->data['lista_grupos'] = $this->Grupo_model->get_grupo_tela(false,$page);
+				$this->data['paginacao']['size'] = $this->data['lista_grupos'][0]['size'];
+				$this->data['paginacao']['pg_atual'] = $page;
 				$this->view("grupo/index",$this->data);
 			}
 			else

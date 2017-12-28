@@ -12,11 +12,17 @@
 			return $query->result_array();
 		}
 		
-		public function get_menu_tela($id = false)
+		public function get_menu_tela($id = false, $page = false)
 		{
 			if($id === false)
 			{
-				$query = $this->db->query("SELECT id, nome, ordem, ativo FROM menu");
+				$limit = $page * ITENS_POR_PAGINA;
+				$inicio = $limit - ITENS_POR_PAGINA;
+				$step = ITENS_POR_PAGINA;
+
+				$query = $this->db->query("SELECT (SELECT count(*) FROM  menu) AS size, 
+											id, nome, ordem, ativo FROM menu ORDER BY data_registro DESC 
+											LIMIT ".$inicio.",".$step."");
 				return $query->result_array();
 			}
 			

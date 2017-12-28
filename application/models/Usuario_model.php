@@ -1,4 +1,5 @@
 <?php
+
 	class Usuario_model extends CI_Model {
 
 		public function __construct()
@@ -6,15 +7,22 @@
 			$this->load->database();
 		}
 		
-		public function get_usuario($id = FALSE)
+		public function get_usuario($id = FALSE, $page = false)
 		{
 			if ($id === FALSE)
 			{
-				$query = $this->db->query("SELECT u.id, u.nome as nome_usuario, u.email, 
+				$limit = $page * ITENS_POR_PAGINA;
+				$inicio = $limit - ITENS_POR_PAGINA;
+				$step = ITENS_POR_PAGINA;
+				
+				
+				
+				$query = $this->db->query("SELECT (SELECT count(*) FROM  usuario) AS size, u.id, 
+											u.nome as nome_usuario, u.email, 
 											u.ativo, g.nome AS nome_grupo 
 												FROM usuario u 
 											LEFT JOIN grupo g ON u.grupo_id = g.Id 
-											ORDER BY u.data_registro DESC");
+											ORDER BY u.data_registro DESC LIMIT ".$inicio.",".$step."");
 				return $query->result_array();
 			}
 

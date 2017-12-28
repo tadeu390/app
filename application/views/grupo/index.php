@@ -1,6 +1,7 @@
 <?php $this->load->helper("permissao");?>
+<?php $this->load->helper("paginacao");?>
 <br /><br />
-<div class='row' id='container' name='container'>
+<div class='row' id='container' name='container' style='padding: 20px;'>
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 	<?php
 		echo "<div class='col-lg-10 offset-lg-1 padding' style='background: #393836;'>";
@@ -45,6 +46,7 @@
 					echo "</tbody>";
 				echo "</table>";
 			echo "</div>";
+			paginacao::get_paginacao($paginacao,$controller);
 		echo "</div>";
 	?>
 </div>

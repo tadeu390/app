@@ -5,6 +5,8 @@ define("READ",'visualizar');
 define("UPDATE",'atualizar');
 define("DELETE",'apagar');
 
+define("ITENS_POR_PAGINA",1);
+
 	class Geral extends CI_Controller 
 	{
 		protected $data;
@@ -22,6 +24,8 @@ define("DELETE",'apagar');
 			$this->load->helper('form');
 			$this->load->library('session');
 			$this->data['url'] = base_url();
+			$this->data['paginacao']['url'] = base_url();
+			$this->data['paginacao']['itens_por_pagina'] = ITENS_POR_PAGINA;
 		}
 
 		public function set_menu()

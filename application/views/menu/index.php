@@ -1,6 +1,7 @@
 <?php $this->load->helper("permissao");?>
+<?php $this->load->helper("paginacao");?>
 <br /><br />
-<div class='row' id='container' name='container'>
+<div class='row' id='container' name='container' style='padding: 20px;'>
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 	<?php
 		echo "<div class='col-lg-10 offset-lg-1 padding' style='background: #393836;'>";
@@ -20,7 +21,7 @@
 						echo"</tr>";
 						echo "<tr>";
 							echo "<td>Nome</td>";
-							echo "<td>Ordem</td>";
+							//echo "<td>Ordem</td>";
 							echo "<td>Ativo</td>";
 							echo "<td class='text-right'></td>";
 						echo "<tr>";
@@ -33,7 +34,7 @@
 								$cor = "style='background-color: #dc3545;'";
 							echo "<tr>";
 								echo "<td $cor>".$lista_menus[$i]['nome']."</td>";
-								echo "<td $cor>".$lista_menus[$i]['ordem']."</td>";
+								//echo "<td $cor>".$lista_menus[$i]['ordem']."</td>";
 								echo "<td $cor>".(($lista_menus[$i]['ativo'] == 1) ? 'Sim' : 'Não')."</td>";
 								echo "<td class='text-right'>";
 								if(permissao::get_permissao(UPDATE,$controller))
@@ -46,6 +47,7 @@
 					echo "</tbody>";
 				echo "</table>";
 			echo "</div>";
+			paginacao::get_paginacao($paginacao,$controller);
 		echo "</div>";
 	?>
 </div>

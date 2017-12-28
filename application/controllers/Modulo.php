@@ -15,12 +15,20 @@
 		/*
 			Renderiza o dashboard
 		*/
-		public function index()
+		public function index($page = false)
 		{
+			if($page === false)
+				$page = 1;
+			
+			$this->data['title'] = 'Administração - Módulos';
 			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
 			{
-				$this->data['title'] = 'Administração - Módulos';
-				$this->data['lista_modulos'] = $this->Modulo_model->get_modulo_tela();
+				$this->data['lista_modulos'] = $this->Modulo_model->get_modulo_tela(false,$page);
+				
+				$this->data['paginacao']['size'] = $this->data['lista_modulos'][0]['size'];
+				$this->data['paginacao']['pg_atual'] = $page;
+				$this->data['paginacao']['itens_por_pagina'] = ITENS_POR_PAGINA;
+				
 				$this->view("modulo/index",$this->data);
 			}
 			else

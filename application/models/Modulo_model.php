@@ -15,24 +15,30 @@
 			return $query->result_array();
 		}
 		
-		public function get_modulo_tela($id = false)
+		public function get_modulo_tela($id = false, $page = false)
 		{
 			if($id === false)
 			{
-				$query = $this->db->query("SELECT me.nome AS nome_menu, mo.descricao, mo.ativo, mo.ordem, 
-											DATE_FORMAT(mo.data_registro, '%d/%m/%Y') as data_registro,
+				$limit = $page * ITENS_POR_PAGINA;
+				$inicio = $limit - ITENS_POR_PAGINA;
+				$step = ITENS_POR_PAGINA;
+
+
+				$query = $this->db->query("SELECT (SELECT count(*) FROM  modulo) AS size, me.nome AS nome_menu, 
+											mo.descricao, mo.ativo, mo.ordem, 
+											DATE_FORMAT(mo.data_registro, '%d/%m/%Y') as data_registro, 
 											mo.nome as nome_modulo, mo.id, mo.url as url_modulo, 
 											mo.icone 
-											FROM menu me 
+												FROM menu me 
 											RIGHT JOIN modulo mo ON me.Id = mo.menu_id 
-											ORDER BY mo.data_registro DESC");
+											ORDER BY mo.data_registro DESC LIMIT ".$inicio.",".$step."");
 				return $query->result_array();
 			}
 			$query = $this->db->query("SELECT me.nome AS nome_menu, mo.descricao, mo.ativo, mo.ordem, 
 											DATE_FORMAT(mo.data_registro, '%d/%m/%Y') as data_registro,
 											mo.nome as nome_modulo, mo.id, mo.url as url_modulo, mo.menu_id,  
 											mo.icone 
-											FROM menu me 
+												FROM menu me 
 											RIGHT JOIN modulo mo ON me.Id = mo.menu_id 
 											WHERE mo.id = ".$this->db->escape($id)." 
 											ORDER BY mo.ordem, me.ordem");

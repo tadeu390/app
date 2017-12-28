@@ -19,13 +19,19 @@
 		/*
 			Renderiza o dashboard
 		*/
-		public function index()
+		public function index($page = false)
 		{
-			$this->data['title'] = 'Administração - dashboard';
+			if($page === false)
+				$page = 1;
 			
+			$this->data['title'] = 'Administração - dashboard';
+
 			if($this->Geral_model->get_permissao(READ,get_class($this)) == true)
 			{
-				$this->data['usuarios'] = $this->Usuario_model->get_usuario();
+				$this->data['usuarios'] = $this->Usuario_model->get_usuario(false,$page);
+				$this->data['paginacao']['size'] = $this->data['usuarios'][0]['size'];
+				$this->data['paginacao']['pg_atual'] = $page;
+				
 				$this->view("usuario/index",$this->data);
 			}
 			else

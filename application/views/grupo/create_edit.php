@@ -1,4 +1,4 @@
-<div class='row' style='padding: 30px;'>
+<div class='row' style='padding: 20px;'>
 		<div class='col-lg-8 offset-lg-2 padding' style="background: #393836;">
 			<div>
 				<a href='javascript:window.history.go(-1)' title='Voltar'>

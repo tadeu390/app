@@ -1,6 +1,7 @@
 <?php $this->load->helper("permissao");?>
+<?php $this->load->helper("paginacao");?>
 <br /><br />
-<div class='row' id='container' name='container'>
+<div class='row' id='container' name='container' style='padding: 20px;'>
 	<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 	<?php
 		echo "<div class='col-lg-10 offset-lg-1 padding' style='background: #393836;'>";
@@ -14,7 +15,7 @@
 						echo"</tr>";
 						echo"<tr>";
 							echo"<td class='text-right' colspan='5'>";
-								echo"<a class='btn btn-danger' href='#'>Exportar PDF</a>";
+								echo"<a class='btn btn-danger' href='#'>PDF</a>";
 							if(permissao::get_permissao(CREATE,$controller))
 								echo"<a class='btn btn-success' href='".$url."$controller/create/0/'>Novo usuário</a>";
 							echo"</td>";
@@ -23,7 +24,7 @@
 							echo "<td>Nome</td>";
 							echo "<td>Ativo</td>";
 							//echo "<td>E-mail</td>";
-							echo "<td>Grupo</td>";
+							//echo "<td>Grupo</td>";
 							echo "<td class='text-right'></td>";
 						echo "<tr>";
 					echo "</thead>";
@@ -37,7 +38,7 @@
 								echo "<td $cor>".$usuarios[$i]['nome_usuario']."</td>";
 								echo "<td $cor>".(($usuarios[$i]['ativo'] == 1) ? 'Sim' : 'Não')."</td>";
 								//echo "<td $cor>".$usuarios[$i]['email']."</td>";
-								echo "<td $cor>".$usuarios[$i]['nome_grupo']."</td>";
+								//echo "<td $cor>".$usuarios[$i]['nome_grupo']."</td>";
 								echo "<td class='text-right'>";
 									if(permissao::get_permissao(UPDATE,$controller))
 										echo "<a href='".$url."$controller/edit/".$usuarios[$i]['id']."' title='Editar' style='color: #dc3545; cursor: pointer;' class='glyphicon glyphicon-edit'></a> | ";
@@ -50,6 +51,7 @@
 					echo "</tbody>";
 				echo "</table>";
 			echo "</div>";
+			paginacao::get_paginacao($paginacao,$controller);
 		echo "</div>";
 	?>
 </div>

@@ -19,12 +19,17 @@
 			return $query->row_array();
 		}
 		
-		public function get_grupo_tela($id = FALSE)
+		public function get_grupo_tela($id = FALSE, $page = FALSE)
 		{
 			if ($id === FALSE)
 			{
-				$query = $this->db->query("SELECT id, nome AS nome_grupo, ativo 
-											FROM grupo");
+				$limit = $page * ITENS_POR_PAGINA;
+				$inicio = $limit - ITENS_POR_PAGINA;
+				$step = ITENS_POR_PAGINA;
+				
+				$query = $this->db->query("SELECT (SELECT count(*) FROM  grupo) AS size, id, 
+											nome AS nome_grupo, ativo  
+											FROM grupo LIMIT ".$inicio.",".$step."");
 				return $query->result_array();
 			}
 

@@ -1,5 +1,5 @@
 <br /><br />
-<div class='row' id='container' name='container'>
+<div class='row' id='container' name='container' style='padding: 20px;'>
 	<?php
 		echo "<div class='col-lg-10 offset-lg-1' style='background: #393836;'>";
 			echo"<a href='javascript:window.history.go(-1)' class='padding' title='Voltar'>";
