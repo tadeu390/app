@@ -5,7 +5,7 @@ define("READ",'visualizar');
 define("UPDATE",'atualizar');
 define("DELETE",'apagar');
 
-define("ITENS_POR_PAGINA",1);
+define("ITENS_POR_PAGINA",5);
 
 	class Geral extends CI_Controller 
 	{

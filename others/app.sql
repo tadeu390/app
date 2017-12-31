@@ -40,7 +40,7 @@ CREATE TABLE modulo(
 	descricao VARCHAR(100),
 	url VARCHAR(20),
 	ordem INT,
-	icone VARCHAR(30),
+	icone VARCHAR(50),
 	menu_id INT,
 	CONSTRAINT fk_menu_modulo 
 		FOREIGN KEY(menu_id) REFERENCES menu(id)
@@ -70,4 +70,4 @@ INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Módu
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Menus',1,'Lista de menus','fa fa-navicon',1,'Menu');
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Grupos',1,'Lista de grupos','fa fa-th-large',1,'Grupo');
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Usuários',1,'Lista de usuários','glyphicon glyphicon-user',1,'Usuario');
-INSERT INTO acesso(modulo_id,criar,visualizar,atualizar,apagar,grupo_id) VALUES(1,1,1,1,1,1);
+INSERT INTO acesso(modulo_id,criar,visualizar,atualizar,apagar,grupo_id) VALUES(3,1,1,1,1,1);

@@ -5,7 +5,7 @@
 		{
 			$this->load->database();
 		}
-		
+		 
 		public function get_grupo($id = FALSE)///usado para o cadastro de usuario
 		{
 			if ($id === FALSE)
@@ -14,8 +14,10 @@
 				return $query->result_array();
 			}
 
-			$query =  $this->db->query("SELECT id, nome AS nome_grupo FROM grupo WHERE ativo = 1 
-										WHERE id = ".$this->db->escape($id)."");
+			$query =  $this->db->query("
+				SELECT id, nome AS nome_grupo FROM grupo WHERE ativo = 1 
+				WHERE id = ".$this->db->escape($id)."");
+
 			return $query->row_array();
 		}
 		
@@ -27,30 +29,40 @@
 				$inicio = $limit - ITENS_POR_PAGINA;
 				$step = ITENS_POR_PAGINA;
 				
-				$query = $this->db->query("SELECT (SELECT count(*) FROM  grupo) AS size, id, 
-											nome AS nome_grupo, ativo  
-											FROM grupo LIMIT ".$inicio.",".$step."");
+				$pagination = " LIMIT ".$inicio.",".$step;
+				if($page === false)
+					$pagination = "";
+
+				$query = $this->db->query("
+					SELECT (SELECT count(*) FROM  grupo) AS size, id, nome AS nome_grupo, ativo  
+						FROM grupo ".$pagination."");
+
 				return $query->result_array();
 			}
 
-			$query =  $this->db->query("SELECT id, nome AS nome_grupo, ativo FROM grupo 
-										WHERE id = ".$this->db->escape($id)."");
+			$query = $this->db->query("
+				SELECT id, nome AS nome_grupo, ativo FROM grupo 
+				WHERE id = ".$this->db->escape($id)."");
+
 			return $query->row_array();
 		}
 		
 		public function deletar($id)
 		{
-			return $this->db->query("UPDATE grupo SET ativo = 0 
-										WHERE id = ".$this->db->escape($id)."");
+			return $this->db->query("
+				UPDATE grupo SET ativo = 0 
+				WHERE id = ".$this->db->escape($id)."");
 		}
 		
 		public function get_grupo_acesso($id)
 		{
-			$query = $this->db->query("SELECT m.nome AS nome_modulo, a.grupo_id, m.id AS modulo_id,
-										a.criar, a.visualizar, a.atualizar, a.apagar, a.id as acesso_id  
-										FROM modulo m 
-										LEFT JOIN acesso a ON m.id = a.modulo_id AND a.grupo_id = ".$this->db->escape($id)."
-										WHERE a.grupo_id = ".$this->db->escape($id)." OR a.grupo_id IS NULL");
+			$query = $this->db->query("
+				SELECT m.nome AS nome_modulo, a.grupo_id, m.id AS modulo_id,
+				a.criar, a.visualizar, a.atualizar, a.apagar, a.id as acesso_id  
+					FROM modulo m 
+				LEFT JOIN acesso a ON m.id = a.modulo_id AND a.grupo_id = ".$this->db->escape($id)."
+				WHERE a.grupo_id = ".$this->db->escape($id)." OR a.grupo_id IS NULL");
+
 			return $query->result_array();
 		}
 		
