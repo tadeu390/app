@@ -167,10 +167,10 @@ h2 {
 input.input-material {
   width: 100%;
   border: none;
-  border-bottom: 1px solid #444951;
+  border-bottom: 1px solid #fff;
   padding: 10px 0;
   background: none;
-  color: #8a8d93;
+  color: #fff;
 }
 
 input.input-material:focus {
@@ -178,7 +178,7 @@ input.input-material:focus {
 }
 
 input.input-material ~ label {
-  color: #aaa;
+  color: #fff;
   position: absolute;
   top: 14px;
   left: 0;
@@ -1529,7 +1529,7 @@ background: url('../imagens/tec4.jpg');
 }
 
 .login-page .form-holder .form small {
-  color: #aaa;
+  color: #fff;
 }
 
 .login-page .form-holder .form .terms-conditions label {

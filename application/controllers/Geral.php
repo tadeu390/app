@@ -7,6 +7,8 @@ define("DELETE",'apagar');
 
 define("ITENS_POR_PAGINA",5);
 
+define("USUARIO_PADRAO",3);
+
 	class Geral extends CI_Controller 
 	{
 		protected $data;

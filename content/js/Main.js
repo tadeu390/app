@@ -16,7 +16,7 @@ var Main = {
 				backdrop : 'static'
 			});
 			$.ajax({
-				url: Main.base_url+'login/validar',
+				url: Main.base_url+'account/validar',
 				data: $("#form_login").serialize(),
 				dataType:'json',
 				cache: false,
@@ -48,7 +48,7 @@ var Main = {
 		$.ajax({
 			type: "POST",
 			dataType: "json",
-			url: Main.base_url+"login/logout",
+			url: Main.base_url+"account/logout",
 			//data: "action=loadall&id=" + 2,
 			complete: function(data) {
 				 location.reload();
@@ -87,7 +87,7 @@ var Main = {
 	show_error : function(form, error, class_error)
 	{
 		if(class_error != "")
-			document.getElementById(form).className = "form-control "+class_error;
+			document.getElementById(form).className = "input-material "+class_error;
 		document.getElementById("error-"+form).innerHTML = error;
 	},
 	limpa_login : function ()
@@ -156,7 +156,7 @@ var Main = {
 			if(trava == 0)
 			{
 				if($("#grupo_id").val() == "0")
-					Main.show_error("grupo_id", 'Selecione um tipo de usuário', 'is-invalid');
+					Main.show_error("grupo_id", 'Selecione um tipo de usuário', '');
 				else if($("#nova_senha").val() != "")
 				{
 					if($("#confirmar_nova_senha").val() == "")
@@ -170,6 +170,22 @@ var Main = {
 					Main.create_edit();
 			}
 		}
+	},
+	registro_validar : function(){
+		if($("#nome").val() == "")
+			Main.show_error("nome", 'Informe o nome de usuário', 'is-invalid');
+		else if($("#email").val() == "")
+			Main.show_error("email", 'Informe o e-mail de usuário', 'is-invalid');
+		else if(Main.valida_email($("#email").val()) == false)
+			Main.show_error("email", 'Formato de e-mail inválido', 'is-invalid');
+		else if($("#senha").val() == "")
+			Main.show_error("senha", 'Informe a senha de usuário', 'is-invalid');
+		else if($("#confirmar_senha").val() == "")
+			Main.show_error("confirmar_senha", 'Repita a senha de usuário', 'is-invalid');
+		else if($("#senha").val() != $("#confirmar_senha").val())
+			Main.show_error("confirmar_senha", 'Senha especificada é diferente da anterior', 'is-invalid');
+		else
+			Main.create_edit();
 	},
 	menu_validar : function()
 	{

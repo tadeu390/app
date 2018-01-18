@@ -49,7 +49,7 @@
 							</div>
 							<button type="submit" class="btn btn-primary">Login</button>
 						</form>
-						<a href="#" class="forgot-pass">Esquece sua senha?</a><br><small>Não tem uma conta? </small><a href="register.html" class="signup">Crie aqui</a>
+						<a href="#" class="forgot-pass">Esqueceu sua senha?</a><br><small>Não tem uma conta? </small><a href="<?php echo $url."Account/registrar"; ?>" class="signup">Crie aqui</a>
 					</div>
 				</div>
 			</div>

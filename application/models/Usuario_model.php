@@ -68,7 +68,7 @@
 			return $query->row_array()['grupo_id'];
 		}
 		
-		public function email_valido($email,$id)
+		public function email_valido($email,$id = false)
 		{
 			$query = $this->db->query("
 				SELECT email FROM usuario 
@@ -76,6 +76,8 @@
 
 			$query = $query->row_array();
 			
+			//verifica se foi inserido o no formulario o email atual, logicamente a busca anterior tera algum resultado, porem o emeil encontrado e o que esta cadastrado para o usuario que esta sendo editado
+
 			if(!empty($query) && $this->get_usuario($id)['email'] != $query['email'])
 				return "invalido";
 			return "valido";

@@ -9,8 +9,11 @@
 		<?= link_tag('content/css/glyphicons.css') ?>
 		<?= link_tag('content/css/site.css') ?>
 		<?= link_tag('content/css/default.css') ?>
+		
 		<style>
-			.form-control, .form-control:focus, .form-control:hover {
+			.form-control, 
+			.form-control:focus, 
+			.form-control:hover {
 				border: none;
 				border-radius: 0px;
 				border-bottom: 1px solid white;
@@ -23,8 +26,18 @@
 			}
 
 		</style>
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	</head >
+		
+		<script type="text/javascript">
+			window.onload = function()
+			{
+		       	if($("#id").val() != 0 && $("#id").val() != '')
+		    		$(".input-material").siblings('.label-material').addClass('active');
+			}
+		</script>
+
+	</head>
 	<body id='c'>
 		<div class='container-fluid'>
 			<nav class="side-navbar">

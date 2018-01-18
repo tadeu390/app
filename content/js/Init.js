@@ -36,7 +36,7 @@ $(document).ready(
 		});
 		
 		$('#grupo_id').blur(function() { 
-			if(this.value != '0') Main.show_error("grupo_id", '', 'is-valid');
+			if(this.value != '0') Main.show_error("grupo_id", '', '');
 		});
 		
 		$('#nova_senha').blur(function() { 
@@ -64,7 +64,7 @@ $(document).ready(
 		});
 		
 		$('#menu_id').blur(function() { 
-			if(this.value != '0') Main.show_error("menu_id", '', 'is-valid');
+			if(this.value != '0') Main.show_error("menu_id", '', '');
 		});
 		
 		$('#email').blur(function()
@@ -90,6 +90,11 @@ $(document).ready(
 		$( "#form_cadastro_Usuario").submit(function( event ) {
 			event.preventDefault();
 			Main.usuario_validar();
+		});
+
+		$( "#form_cadastro_Login").submit(function( event ) {
+			event.preventDefault();
+			Main.registro_validar();
 		});
 		
 		$( "#form_cadastro_Menu").submit(function( event ) {
