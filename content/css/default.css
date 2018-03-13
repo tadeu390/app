@@ -457,6 +457,7 @@ nav.side-navbar {
   transition: all 0.3s linear;
   z-index: 999;
   overflow-y: auto;
+  overflow-x: hidden;
   /* arrow rotation -------------- */
   /*  Side navbar small ------------------------ */
 }
