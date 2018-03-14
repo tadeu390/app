@@ -70,6 +70,8 @@ INSERT INTO grupo(nome,ativo) VALUES('Administrador',1);
 INSERT INTO usuario (nome,email,senha,ativo,grupo_id) VALUES(
 					'Admin','admin@dominio.com.br','admin123',1,1);
 
+INSERT INTO configuracoes_geral(itens_por_pagina) VALUES(5);
+
 INSERT INTO menu(ativo,nome,ordem) VALUES(1,'Administrativo',1);
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Módulos',1,'Lista de módulos','fa fa-list-alt',1,'Modulo');
 INSERT INTO modulo(ativo,nome,ordem,descricao,icone,menu_id,url) VALUES(1,'Menus',1,'Lista de menus','fa fa-navicon',1,'Menu');
