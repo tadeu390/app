@@ -170,7 +170,7 @@
 								<div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn">
 									<span class="glyphicon glyphicon-align-justify" style='line-height: 40px; transform: scale(2.5);'> </span></a>
 								</div>
-								<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+								<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center col-2">
 									<li class="nav-item">
 										<?php
 										echo "<div tabindex='0' data-trigger='focus'  data-toggle='popover' data-html='true' data-placement='bottom' title='<div class=\"text-center\">Opções da conta</div>' 
