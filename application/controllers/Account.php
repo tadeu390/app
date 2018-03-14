@@ -20,7 +20,7 @@
 			$this->load->view('templates/header',$this->data);
 			$this->load->view('account/login',$this->data);
 			$this->load->view('templates/footer',$this->data);
-			if(!empty($this->login_model->session_is_valid($this->session->id)['id']))
+			if($this->Account_model->session_is_valid()['status'] == "ok")
 				redirect('admin/dashboard');
 		}
 		/*
@@ -29,34 +29,58 @@
 		public function logout()
 		{
 			unset($_SESSION['id']);
+			unset($_SESSION['grupo_id']);
+			delete_cookie ('id');
+			delete_cookie ('grupo_id');
 		}
-		
+			
+		public function index()
+		{
+			redirect("Account/login");
+		}
 		/*
 			Valida os dados de login
 		*/
-		
-		public function index()
-		{
-			redirect("account/login");
-		}
-
 		public function validar()
 		{
 			$email = $this->input->post('email-login');
 			$senha = $this->input->post('senha-login');
-			$response = $this->login_model->get_login($email,$senha);
+			$conectado = $this->input->post('conectado');
+
+			$response = $this->Account_model->get_login($email,$senha);
 			$data['title'] = 'Login';
 			
 			
-			if(!empty($this->login_model->session_is_valid($this->session->id)['id']))
+			if($this->Account_model->session_is_valid() == "ok")//verifica se ja existe uma sessao, caso sim apenas ira recarregar a pagina
 				$response = 'valido';
-			else if(!empty($response))
+			else if(!empty($response)) //se os dados do login forem validados com sucesso entao cria o cookie ou a sessao
 			{
-				$login = array(
-				   'id'  => $response['id'],
-				   'grupo_id'  => $response['grupo_id']
-				);
-				$this->session->set_userdata($login);
+				if($conectado == 1)
+				{
+					 $cookie = array(
+                        'name'   => 'id',
+                        'value'  => $response['id'],                            
+                        'expire' => 100000000,                                                                                   
+                        'secure' => FALSE
+                        );
+              		$this->input->set_cookie($cookie);
+
+              		 $cookie = array(
+                        'name'   => 'grupo_id',
+                        'value'  => $response['grupo_id'],                            
+                        'expire' => 100000000,                                                                                   
+                        'secure' => FALSE
+                        );
+              		$this->input->set_cookie($cookie);
+				}
+				else
+				{
+					$login = array(
+					   'id'  => $response['id'],
+					   'grupo_id'  => $response['grupo_id']
+					);
+					$this->session->set_userdata($login);
+				}
 				$response = 'valido';
 			}
 			else
@@ -72,7 +96,7 @@
 			$this->data['obj'] = $this->Usuario_model->get_usuario(0);
 			$this->data['title'] = 'Usuario - Cadastro';
 			$this->load->view('templates/header',$this->data);
-			$this->load->view("usuario/create_edit",$this->data);
+			$this->load->view("account/cadastro",$this->data);
 			$this->load->view('templates/footer',$this->data);
 		}
 

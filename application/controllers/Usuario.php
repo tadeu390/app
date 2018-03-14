@@ -6,8 +6,8 @@
 		{
 			parent::__construct();
 			
-			if(empty($this->login_model->session_is_valid($this->session->id)['id']))
-				redirect('login/login');
+			if(empty($this->Account_model->session_is_valid($this->session->id)['id']))
+				redirect('Account/login');
 			
 			$this->load->model('Usuario_model');
 			$this->load->model('Grupo_model');
@@ -73,6 +73,9 @@
 		
 		public function edit($id = false)
 		{
+			if($id === false)
+				$id = $this->Account_model->session_is_valid()['id'];
+
 			if($this->Geral_model->get_permissao(UPDATE,get_class($this)) == true)
 			{
 				$this->data['title'] = 'Usuario - Cadastro';

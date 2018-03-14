@@ -5,8 +5,6 @@ define("READ",'visualizar');
 define("UPDATE",'atualizar');
 define("DELETE",'apagar');
 
-define("ITENS_POR_PAGINA",5);
-
 define("USUARIO_PADRAO",3);
 
 	class Geral extends CI_Controller 
@@ -16,7 +14,10 @@ define("USUARIO_PADRAO",3);
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('login_model');
+			$this->load->model('Settings_model');
+			define("ITENS_POR_PAGINA",$this->Settings_model->get_geral()['itens_por_pagina']);
+
+			$this->load->model('Account_model');
 			$this->load->model('Menu_model');
 			$this->load->model('Modulo_model');
 			$this->load->model('Geral_model');
@@ -25,6 +26,7 @@ define("USUARIO_PADRAO",3);
 			$this->load->helper('html');
 			$this->load->helper('form');
 			$this->load->library('session');
+			$this->load->helper('cookie');
 			$this->data['url'] = base_url();
 			$this->data['paginacao']['url'] = base_url();
 			$this->data['paginacao']['itens_por_pagina'] = ITENS_POR_PAGINA;

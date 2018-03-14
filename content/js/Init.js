@@ -78,21 +78,26 @@ $(document).ready(
 			}
 		});
 		
-		$('#email').keypress(function() { 
+		$('#email').keypress(function() {
 			if ((window.event ? event.keyCode : event.which) == 13){Main.login();}; 
 		});
 		
-		$('#senha').keypress(function() { 
+		$('#senha').keypress(function() {
 			if ((window.event ? event.keyCode : event.which) == 13){Main.login();}; 
 		});
 		//BTN CADASTROS
-		
+
+		$( "#form_cadastro_geral_Settings").submit(function( event ) {
+			event.preventDefault();
+			Main.settings_geral_validar();
+		});
+
 		$( "#form_cadastro_Usuario").submit(function( event ) {
 			event.preventDefault();
 			Main.usuario_validar();
 		});
 
-		$( "#form_cadastro_Login").submit(function( event ) {
+		$( "#form_cadastro_Account").submit(function( event ) {
 			event.preventDefault();
 			Main.registro_validar();
 		});

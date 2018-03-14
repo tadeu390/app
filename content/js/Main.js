@@ -49,7 +49,6 @@ var Main = {
 			type: "POST",
 			dataType: "json",
 			url: Main.base_url+"account/logout",
-			//data: "action=loadall&id=" + 2,
 			complete: function(data) {
 				 location.reload();
 			}
@@ -65,7 +64,6 @@ var Main = {
 		else
 			return true;
 	},
-	
 	valida_email : function(email)
 	{
 		var nome = email.substring(0, email.indexOf("@"));
@@ -127,6 +125,9 @@ var Main = {
 				}
 			}
 		});
+	},
+	settings_geral_validar : function(){
+		Main.create_edit();
 	},
 	usuario_validar : function(){
 		if($("#nome").val() == "")
@@ -235,5 +236,8 @@ var Main = {
 				location.reload();
 			}
 		});
+	},
+	settings : function(){
+		$("#settings").modal('show');
 	}
 };

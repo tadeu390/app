@@ -134,6 +134,34 @@
 				</div>
 			  </div>
 			</div>
+
+			<div id="settings" class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+				  		<div class="modal-header text-center">
+							<h5 class="modal-title">
+								<span class="glyphicon glyphicon-cog"></span> Configurações
+							</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  			<span aria-hidden="true">&times;</span>
+							</button>
+				  		</div>
+					  	<div id="corpo_settings" class="modal-body">
+							<div class="row padding30" style="padding-top: 10px;">
+								<div class="col-lg-6">
+									<a href="<?php echo $url."Usuario/edit" ?>" id='conta' class='btn btn-success'>Configurações da conta</a>
+								</div>
+								<div class="col-lg-6">
+									<a href="<?php echo $url."Settings/geral" ?>" id='conta' class='btn btn-success'>Configurações gerais</a>
+								</div>
+							</div>
+				  		</div>
+					  	<!--<div class="modal-footer">
+					  	</div>-->
+					</div>
+			  	</div>
+			</div>
+
 			<div class='page home-page'>
 				<header class="header">
 					<nav class="navbar">
@@ -147,7 +175,7 @@
 										<?php
 										echo "<div data-toggle='popover' data-html='true' data-placement='left' title='<div class=\"text-center\">Opções da conta</div>' 
 												data-content='
-													<button class=\"btn btn-outline-info btn-block glyphicon glyphicon-cog\" onclick=\"Main.logout()\">&nbsp;Configurações</button><button class=\"btn btn-outline-danger btn-block glyphicon glyphicon-log-out\" onclick=\"Main.logout()\">&nbsp;Sair</button>
+													<button onclick=\"Main.settings();\" class=\"btn btn-outline-info btn-block glyphicon glyphicon-cog\">&nbsp;Configurações</button><button class=\"btn btn-outline-danger btn-block glyphicon glyphicon-log-out\" onclick=\"Main.logout()\">&nbsp;Sair</button>
 												
 												'  style='font-size: 40px; color: #f5f5f5; cursor: pointer; padding: 10px; border: 1px solid #e9ecef; border-radius: 35px;'>
 													 <span class='glyphicon glyphicon-user'></span>

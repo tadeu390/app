@@ -1,11 +1,12 @@
 <?php
 	require_once("Geral.php");
 
-	class Admin extends Geral {
+	class Admin extends Geral 
+	{
 		public function __construct()
 		{
 			parent::__construct();
-			if(empty($this->login_model->session_is_valid($this->session->id)['id']))
+			if($this->Account_model->session_is_valid()['status'] != "ok")
 				redirect('Account/login');
 			$this->set_menu();
 			$this->data['controller'] = get_class($this);

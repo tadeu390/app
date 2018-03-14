@@ -35,7 +35,7 @@
 					<div class="content">
 					  <?php
 							$atr = array('id' => 'form_login','name' => 'form_login');
-							echo form_open('login/validar',$atr);
+							echo form_open('account/validar',$atr);
 						?>
 							<div class="form-group">
 								<input id="email-login" autocomplete="false" spellcheck="false" name="email-login" type="text" class="input-material">
@@ -47,6 +47,11 @@
 								<label for="senha-login" class="label-material">Senha</label>
 								<div class='input-group mb-2 mb-sm-0 text-danger' id='error-senha-login'></div>
 							</div>
+							<div class='checkbox checbox-switch switch-success custom-controls-stacked text-white'>
+								<label for='conectado'>
+									<input type='checkbox' id='conectado' name='conectado' value='1'><span></span>Manter conectado
+								</label>
+							</div><br />
 							<button type="submit" class="btn btn-primary">Login</button>
 						</form>
 						<a href="#" class="forgot-pass">Esqueceu sua senha?</a><br><small>Não tem uma conta? </small><a href="<?php echo $url."Account/registrar"; ?>" class="signup">Crie aqui</a>

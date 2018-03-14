@@ -61,6 +61,11 @@ CREATE TABLE acesso(
 		FOREIGN KEY(grupo_id) REFERENCES grupo(id)
 );
 
+CREATE TABLE configuracoes_geral(
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    itens_por_pagina INT NOT NULL
+);
+
 INSERT INTO grupo(nome,ativo) VALUES('Administrador',1);
 INSERT INTO usuario (nome,email,senha,ativo,grupo_id) VALUES(
 					'Admin','admin@dominio.com.br','admin123',1,1);

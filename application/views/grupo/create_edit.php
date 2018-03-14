@@ -1,12 +1,12 @@
-<div class='row' style='padding: 20px;'>
+<div class='row padding30'>
 		<div class='col-lg-8 offset-lg-2 padding' style="background: #393836;">
 			<div>
 				<a href='javascript:window.history.go(-1)' title='Voltar'>
-					<span class='glyphicon glyphicon-arrow-left' style='font-size: 25px; color: white;'></span>
+					<span class='glyphicon glyphicon-arrow-left text-white' style='font-size: 25px;'></span>
 				</a>
 			</div>
 			<div>
-				<p class="text-center padding" style='color: white;'><?php echo((isset($obj['id'])) ? 'Editar grupo' : 'Novo grupo'); ?></p>					
+				<p class="text-center padding text-white"><?php echo((isset($obj['id'])) ? 'Editar grupo' : 'Novo grupo'); ?></p>					
 			</div>
 			<?php $atr = array("id" => "form_cadastro_$controller", "name" => "form_cadastro"); 
 				echo form_open("$controller/store", $atr); 
@@ -15,7 +15,7 @@
 				<input type='hidden' id='id' name='id' value='<?php if(!empty($obj['id'])) echo $obj['id']; ?>'/>
 				<input type='hidden' id='controller' value='<?php echo $controller; ?>'/>
 				
-				<div class="form-group" style="position: relative;">
+				<div class="form-group relative">
 					<input id="nome" name="nome" value='<?php echo (!empty($obj['nome_grupo']) ? $obj['nome_grupo']:''); ?>' type="text" class="input-material">
 					<label for="nome" class="label-material">Nome</label>
 					<div class='input-group mb-2 mb-sm-0 text-danger' id='error-nome'></div>
