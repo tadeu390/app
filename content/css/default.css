@@ -3354,3 +3354,6 @@ a.text-dark:focus, a.text-dark:hover {
 											  #9fd8ef 51%,
 											  #2ab0ed 100%);
 }
+.form-control:focus {
+    box-shadow: none !important;
+}
